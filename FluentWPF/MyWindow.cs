@@ -10,6 +10,7 @@ using FluentWPFAPI.ContentControlApi;
 using FluentWPFAPI.GridApi;
 using FluentWPFAPI.ImageApi;
 using FluentWPFAPI.ProgressApi;
+using FluentWPFAPI.ThemeApi;
 
 namespace FluentWPF
 {
@@ -19,6 +20,12 @@ namespace FluentWPF
 
     public MyWindow()
     {
+      var style = StyleExtensions.Style()
+        .Targets<CheckBox>()
+        .Condition(CheckBox.IsCheckedProperty, true)
+        .Set(Control.BackgroundProperty, new SolidColorBrush(Colors.Aqua))
+        .EndCondition();
+
       this._content = new ContentControl { DataContext = new MyWindowDataContext() }
         .AsFluent()
         .Size(400, 150)
@@ -37,7 +44,8 @@ namespace FluentWPF
           .Set(new CheckBox()
             .AsFluent()
             .Center()
-            .Style(Theme.NiceCheckBox)
+            .Style(style)
+            //.Style(Theme.NiceCheckBox)
             .Contains("Shuffle")
             .Bind(ToggleButton.IsCheckedProperty, nameof(MyWindowDataContext.IsShuffleEnabled), BindingMode.OneWay)
             )

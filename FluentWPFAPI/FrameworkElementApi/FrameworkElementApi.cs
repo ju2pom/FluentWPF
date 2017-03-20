@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using FluentWPFAPI.ThemeApi;
 
 namespace FluentWPFAPI.FrameworkElementApi
 {
@@ -16,6 +17,14 @@ namespace FluentWPFAPI.FrameworkElementApi
       where T : FrameworkElement
     {
       Get(item).Style = style;
+
+      return item;
+    }
+
+    public static IFluentItem<T> Style<T>(this IFluentItem<T> item, IFluentStyle style)
+      where T : FrameworkElement
+    {
+      style.Apply(Get(item));
 
       return item;
     }
