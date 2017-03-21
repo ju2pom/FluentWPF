@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace FluentWPFAPI.GridApi
 {
@@ -22,6 +23,10 @@ namespace FluentWPFAPI.GridApi
     internal int RowSpan { get; set; }
 
     internal int ColSpan { get; set; }
+
+    internal GridLength? Width { get; set; }
+
+    internal GridLength? Height { get; set; }
 
     /*    public static implicit operator Grid(GridCell gridCell)
         {
