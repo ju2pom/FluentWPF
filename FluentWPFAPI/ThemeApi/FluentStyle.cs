@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace FluentWPFAPI.ThemeApi
 {
-  internal class FluentStyle<T> : IFluentStyle<T>, IInternalFluentStyle
+  internal class FluentStyle<T> : Style, IFluentStyle<T>, IInternalFluentStyle
     where T : FrameworkElement
   {
     private readonly Style style;

@@ -59,8 +59,10 @@
     <Compile Include="ProgressApi\ProgressApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThemeApi\FluentStyle.cs" />
+    <Compile Include="ThemeApi\FluentTemplate.cs" />
     <Compile Include="ThemeApi\IStyle.cs" />
     <Compile Include="ThemeApi\StyleExtensions.cs" />
+    <Compile Include="ThemeApi\TemplateExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

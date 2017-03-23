@@ -28,6 +28,14 @@ namespace FluentWPFAPI.ThemeApi
       return fluentStyle;
     }
 
+    public static Style Get<T>(this IFluentStyle<T> fluentStyle)
+      where T : FrameworkElement
+    {
+      IInternalFluentStyle internalFluentStyle = fluentStyle as IInternalFluentStyle;
+
+      return internalFluentStyle?.Style;
+    }
+
     public static IFluentTrigger<T> When<T>(this IFluentStyle<T> fluentStyle, DependencyProperty property)
       where T : FrameworkElement
     {
