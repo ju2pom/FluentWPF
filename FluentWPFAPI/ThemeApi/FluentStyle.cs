@@ -1,14 +1,15 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+//using System.Windows.Interactivity;
+//using TriggerAction = System.Windows.Interactivity.TriggerAction;
 
 namespace FluentWPFAPI.ThemeApi
 {
-  internal class FluentStyle : IFluentStyle, IInternalFluentStyle
+  internal class FluentStyle<T> : IFluentStyle<T>, IInternalFluentStyle
+    where T : FrameworkElement
   {
     private readonly Style style;
-
-    private Trigger currentTrigger;
 
     public FluentStyle()
     {
@@ -22,49 +23,61 @@ namespace FluentWPFAPI.ThemeApi
       this.style.Setters.Add(new Setter(Control.TemplateProperty, template));
     }
 
-    public void Apply(FrameworkElement element)
+    public void Apply(T element)
     {
       element.Style = this.style;
     }
 
     public void AddSetter(DependencyProperty property, object value)
     {
-      if (this.currentTrigger == null)
-      {
-        this.style.Setters.Add(new Setter(property, value));
-      }
-      else
-      {
-        this.currentTrigger.Setters.Add(new Setter(property, value));
-      }
+      this.style.Setters.Add(new Setter(property, value));
     }
 
-    public void StartTrigger(DependencyProperty property, object value)
-    {
-      this.currentTrigger = new Trigger
-      {
-        Property = property,
-        Value = value
-      };
-    }
-
-    public void EndTrigger()
-    {
-      if (this.currentTrigger != null)
-      {
-        this.style.Triggers.Add(this.currentTrigger);
-        this.currentTrigger = null;
-      }
-    }
-
-    public void BasedOn(IFluentStyle basedOnStyle)
+    public void BasedOn<U>(IFluentStyle<U> basedOnStyle) where U : FrameworkElement
     {
       this.style.BasedOn = (basedOnStyle as IInternalFluentStyle)?.Style;
     }
 
-    public void SetTargetType(Type targetType)
+    public IFluentTrigger<T> AddTrigger(DependencyProperty property)
     {
-      this.style.TargetType = targetType;
+      FluentTrigger<T> trigger = new FluentTrigger<T>(this)
+      {
+        Property = property
+      };
+
+      this.style.Triggers.Add(trigger);
+
+      return trigger;
+    }
+  }
+
+  internal class FluentTrigger<T> : Trigger, IFluentTrigger<T>
+    where T : FrameworkElement
+  {
+    public FluentTrigger(IFluentStyle<T> fluentStyle)
+    {
+      this.FluentStyle = fluentStyle;
+    }
+
+    public IFluentStyle<T> FluentStyle { get; }
+
+    public void SetProperty(DependencyProperty property)
+    {
+      this.Property = property;
+    }
+
+    public void SetValue(object value)
+    {
+      this.Value = value;
+    }
+
+    public void AddSetter(DependencyProperty property, object value)
+    {
+      this.Setters.Add(new Setter(property, value));
+    }
+
+    public void AddCallback(Action<T> action)
+    {
     }
   }
 }

@@ -21,7 +21,7 @@ namespace FluentWPFAPI.FrameworkElementApi
       return item;
     }
 
-    public static IFluentItem<T> Style<T>(this IFluentItem<T> item, IFluentStyle style)
+    public static IFluentItem<T> Style<T>(this IFluentItem<T> item, IFluentStyle<T> style)
       where T : FrameworkElement
     {
       style.Apply(Get(item));

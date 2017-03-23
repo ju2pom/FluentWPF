@@ -20,11 +20,16 @@ namespace FluentWPF
 
     public MyWindow()
     {
-      var style = StyleExtensions.Style()
-        .Targets<CheckBox>()
-        .Condition(ToggleButton.IsCheckedProperty, true)
-        .Set(Control.BackgroundProperty, new SolidColorBrush(Colors.Aqua))
-        .EndCondition();
+      var fluentStyle = StyleExtensions.Style<CheckBox>()
+        .When(CheckBox.IsCheckedProperty)
+        .Is(true)
+        .Then(CheckBox.FontWeightProperty, FontWeights.Bold)
+        .Then(Control.ForegroundProperty, new SolidColorBrush(Colors.DarkBlue))
+        .EndWhen()
+        .When(Control.IsMouseOverProperty)
+        .Is(true)
+        .Then(Control.BackgroundProperty, new SolidColorBrush(Colors.Bisque))
+        .EndWhen();
 
       this._content = new ContentControl { DataContext = new MyWindowDataContext() }
         .AsFluent()
@@ -42,7 +47,7 @@ namespace FluentWPF
           .Contains(new CheckBox()
             .AsFluent()
             .Center()
-            .Style(style)
+            .Style(fluentStyle)
             //.Style(Theme.NiceCheckBox)
             .Contains("Shuffle")
             .Bind(ToggleButton.IsCheckedProperty, nameof(MyWindowDataContext.IsShuffleEnabled), BindingMode.OneWay)

@@ -9,20 +9,28 @@ namespace FluentWPFAPI.ThemeApi
     Style Style { get; }
   }
 
-  public interface IFluentStyle
+  public interface IFluentStyle<T>
+    where T : FrameworkElement
   {
-    void SetTargetType(Type targetType);
+    void BasedOn<U>(IFluentStyle<U> basedOnStyle) where U : FrameworkElement;
 
-    void BasedOn(IFluentStyle basedOnStyle);
-
-    void Apply(FrameworkElement element);
+    void Apply(T element);
 
     void SetTemplate(ControlTemplate template);
 
     void AddSetter(DependencyProperty property, object value);
 
-    void StartTrigger(DependencyProperty property, object value);
+    IFluentTrigger<T> AddTrigger(DependencyProperty property);
+  }
 
-    void EndTrigger();
+  public interface IFluentTrigger<T>
+  {
+    void SetProperty(DependencyProperty property);
+
+    void SetValue(object value);
+
+    void AddSetter(DependencyProperty property, object value);
+
+    void AddCallback(Action<T> action);
   }
 }
