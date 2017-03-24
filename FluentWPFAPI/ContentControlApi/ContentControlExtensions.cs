@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace FluentWPFAPI.ContentControlApi
 {
-  public static class WpfExtensions
+  public static class ContentControlExtensions
   {
     public static IFluentItem<T> AsFluent<T>(this T element)
       where T : FrameworkElement

@@ -1,10 +1,38 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using FluentWPFAPI.ThemeApi;
+
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace FluentWPFAPI.FrameworkElementApi
 {
-  public static class FrameworkElementApi
+  public static class FrameworkElementExtensions
   {
+    public static IFluentItem<T> Set<T>(this IFluentItem<T> item, DependencyProperty property, object value)
+      where T : FrameworkElement
+    {
+      Get(item).SetValue(property, value);
+
+      return item;
+    }
+
+    public static IFluentItem<T> Set<T>(this IFluentItem<T> item, Expression<Func<T, object>> expression, object value)
+  where T : FrameworkElement
+    {
+      var memberSelectorExpression = expression.Body as MemberExpression;
+      if (memberSelectorExpression != null)
+      {
+        var property = memberSelectorExpression.Member as PropertyInfo;
+        if (property != null)
+        {
+          property.SetValue(Get(item), value, null);
+        }
+      }
+
+      return item;
+    }
+
     public static IFluentItem<T> Style<T>(this IFluentItem<T> item, string key)
       where T : FrameworkElement
     {

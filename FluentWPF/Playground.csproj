@@ -59,6 +59,14 @@
       <DependentUpon>WindowHeader.xaml</DependentUpon>
     </Compile>
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="Button.xaml.cs" >
+      <DependentUpon>Theme.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CheckBox.xaml.cs">
+      <DependentUpon>Theme.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Theme.xaml.cs">
       <DependentUpon>Theme.xaml</DependentUpon>
       <SubType>Code</SubType>

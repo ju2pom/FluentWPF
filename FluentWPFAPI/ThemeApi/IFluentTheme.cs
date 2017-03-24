@@ -1,35 +1,13 @@
-﻿using System.Windows;
-
-namespace FluentWPFAPI.ThemeApi
+﻿namespace FluentWPFAPI.ThemeApi
 {
   public interface IFluentTheme
   {
-    void LoadButtonStyle();
+    void LoadButtonStyle(IThemeColors colors);
 
-    void LoadCheckBoxStyle();
+    void LoadCheckBoxStyle(IThemeColors colors);
 
-    void LoadRadioButtonStyle();
+    void LoadRadioButtonStyle(IThemeColors colors);
 
-    void LoadCustomStyles();
-  }
-
-  public class FluentTheme : ResourceDictionary, IFluentTheme
-  {
-    public FluentTheme()
-    {
-      this.LoadButtonStyle();
-      this.LoadCheckBoxStyle();
-      this.LoadRadioButtonStyle();
-
-      this.LoadCustomStyles();
-    }
-
-    public virtual void LoadButtonStyle() { }
-
-    public virtual void LoadCheckBoxStyle() { }
-
-    public virtual void LoadRadioButtonStyle() { }
-
-    public virtual void LoadCustomStyles() { }
+    void LoadCustomStyles(IThemeColors colors);
   }
 }

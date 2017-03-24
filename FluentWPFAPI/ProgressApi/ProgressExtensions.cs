@@ -1,15 +1,9 @@
 ﻿using System.Windows.Controls;
-using FluentWPFAPI.ContentControlApi;
 
 namespace FluentWPFAPI.ProgressApi
 {
   public static class ProgressExtensions
   {
-    public static IFluentItem<ProgressBar> ProgressBar()
-    {
-      return new ProgressBar().AsFluent();
-    }
-
     public static IFluentItem<ProgressBar> Indeterminate(this IFluentItem<ProgressBar> item)
     {
       Get(item).IsIndeterminate = true;

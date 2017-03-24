@@ -3,7 +3,7 @@ using System.Windows.Data;
 
 namespace FluentWPFAPI.BindingApi
 {
-  public static class BindingApi
+  public static class BindingExtensions
   {
     public static IFluentItem<T> Bind<T>(this IFluentItem<T> item, DependencyProperty property, string path, BindingMode mode = BindingMode.Default)
       where T : FrameworkElement

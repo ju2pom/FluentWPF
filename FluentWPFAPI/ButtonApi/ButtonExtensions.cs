@@ -4,7 +4,7 @@ using System.Windows.Controls.Primitives;
 
 namespace FluentWPFAPI.ButtonApi
 {
-  public static class ButtonApi
+  public static class ButtonExtensions
   {
     public static IFluentItem<Button> ClickAction(this IFluentItem<Button> item, RoutedEventHandler handler)
     {

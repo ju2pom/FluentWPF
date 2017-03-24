@@ -3,32 +3,4 @@
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:themeApi="clr-namespace:FluentWPFAPI.ThemeApi;assembly=FluentWPFAPI"
-  >
-
-  <Style x:Key="NiceCheckBox" TargetType="CheckBox">
-    <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="CheckBox">
-          <Border x:Name="Border"
-            Background="{TemplateBinding Background}"
-            >
-            <ContentPresenter
-              HorizontalAlignment="Center"
-              VerticalAlignment="Center"
-              />
-          </Border>
-          <ControlTemplate.Triggers>
-            <Trigger Property="IsChecked" Value="True">
-              <Setter Property="FontWeight" Value="Bold" />
-              <Setter Property="Foreground" Value="DarkBlue" />
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
-              <Setter Property="Background" Value="Bisque" />
-            </Trigger>
-          </ControlTemplate.Triggers>
-        </ControlTemplate>
-      </Setter.Value>
-    </Setter>
-  </Style>
-
-</themeApi:FluentTheme>
+  />
