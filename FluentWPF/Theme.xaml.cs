@@ -6,36 +6,17 @@ using FluentWPFAPI.ThemeApi;
 
 namespace FluentWPF
 {
-  public partial class Theme
+  public partial class Theme : FluentTheme
   {
-    private static Theme _instance;
-
-    public static Theme Instance
-    {
-      get
-      {
-        if (_instance == null)
-        {
-          _instance = new Theme();
-        }
-
-        return _instance;
-      }
-    }
-
     public Theme()
     {
       this.InitializeComponent();
-
-      this.LoadCheckBox();
     }
-
-    public static Style NiceCheckBox => Instance[nameof(Theme.NiceCheckBox)] as Style;
   }
 
-  public partial class Theme
+  public partial class Theme : FluentTheme
   {
-    protected void LoadCheckBox()
+    public override void LoadCheckBoxStyle()
     {
       var template = TemplateExtensions.Template<CheckBox>()
           .Factory<CheckBox, Border>()
@@ -44,10 +25,9 @@ namespace FluentWPF
           .Set(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Center)
           .Set(FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Center)
           .Bind(ContentPresenter.ContentProperty, ContentControl.ContentProperty)
-          .Get()
-        ;
+          .Get();
 
-      this.CheckBox = StyleExtensions.Style<CheckBox>()
+      var style = StyleExtensions.Style<CheckBox>()
         .When(ToggleButton.IsCheckedProperty)
         .Is(true)
         .Then(Control.FontWeightProperty, FontWeights.Bold)
@@ -60,8 +40,7 @@ namespace FluentWPF
         .Template(template)
         .Get();
 
+      this.Add(typeof(CheckBox), style);
     }
-
-    public Style CheckBox { get; private set; }
   }
 }

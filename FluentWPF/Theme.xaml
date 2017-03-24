@@ -1,7 +1,8 @@
-﻿<ResourceDictionary
+﻿<themeApi:FluentTheme
   x:Class="FluentWPF.Theme"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:themeApi="clr-namespace:FluentWPFAPI.ThemeApi;assembly=FluentWPFAPI"
   >
 
   <Style x:Key="NiceCheckBox" TargetType="CheckBox">
@@ -18,7 +19,11 @@
           </Border>
           <ControlTemplate.Triggers>
             <Trigger Property="IsChecked" Value="True">
-              <Setter Property="Background" Value="Aqua" />
+              <Setter Property="FontWeight" Value="Bold" />
+              <Setter Property="Foreground" Value="DarkBlue" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter Property="Background" Value="Bisque" />
             </Trigger>
           </ControlTemplate.Triggers>
         </ControlTemplate>
@@ -26,4 +31,4 @@
     </Setter>
   </Style>
 
-</ResourceDictionary>
+</themeApi:FluentTheme>
