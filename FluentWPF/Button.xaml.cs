@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using FluentWPFAPI.ThemeApi;
+using FluentWPFAPI.ThemeApi.Template;
 
 namespace FluentWPF
 {
@@ -9,22 +9,22 @@ namespace FluentWPF
   {
     public override void LoadButtonStyle(IThemeColors colors)
     {
-      var template = TemplateExtensions.Template<Button>()
-          .Factory<Button, Border>()
-          .Set(Border.CornerRadiusProperty, new CornerRadius(4))
-          .Bind(Control.BackgroundProperty, Control.BackgroundProperty)
-          .Factory<Button, ContentPresenter>()
+      var template = TemplateExtensions.Create<Border>()
+        .Set(Border.CornerRadiusProperty, new CornerRadius(4))
+        .TemplateBinding(Control.BackgroundProperty, Control.BackgroundProperty)
+        .Contains(TemplateExtensions.Create<ContentPresenter>()
           .Set(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Center)
           .Set(FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Center)
-          .Bind(ContentPresenter.ContentProperty, ContentControl.ContentProperty)
-          .Get();
+          .TemplateBinding(ContentPresenter.ContentProperty, ContentControl.ContentProperty))
+        .AsControlTemplate<Button>();
 
       var style = StyleExtensions.Style<Button>()
+        .Set(Control.ForegroundProperty, colors.Text.Normal)
         .Set(FrameworkElement.WidthProperty, 25d)
         .Set(FrameworkElement.HeightProperty, 25d)
         .When(UIElement.IsMouseOverProperty)
         .Is(true)
-        .Then(Control.BackgroundProperty, new SolidColorBrush(Colors.Bisque))
+        .Then(Control.BackgroundProperty, colors.Control.Over)
         .EndWhen()
         .Template(template)
         .Get();

@@ -12,7 +12,7 @@ namespace FluentWPFAPI.ThemeApi
   public interface IFluentStyle<T>
     where T : FrameworkElement
   {
-    void BasedOn<U>(IFluentStyle<U> basedOnStyle) where U : FrameworkElement;
+    void Extend<U>(IFluentStyle<U> basedOnStyle) where U : FrameworkElement;
 
     void Apply(T element);
 

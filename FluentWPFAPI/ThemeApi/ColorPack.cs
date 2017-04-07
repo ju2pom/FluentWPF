@@ -4,12 +4,12 @@ namespace FluentWPFAPI.ThemeApi
 {
   public class ColorPack : IColorPack
   {
-    public ColorPack(Brush normal, Brush over, Brush selected, Brush disabled)
+    public ColorPack(Brush normal, Brush over = null, Brush selected = null, Brush disabled = null)
     {
       this.Normal = normal;
-      this.Over = over;
-      this.Selected = selected;
-      this.Disabled = disabled;
+      this.Over = over ?? normal;
+      this.Selected = selected ?? normal;
+      this.Disabled = disabled ?? normal;
     }
 
     public Brush Normal { get; }

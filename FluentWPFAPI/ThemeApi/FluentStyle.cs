@@ -32,7 +32,7 @@ namespace FluentWPFAPI.ThemeApi
       this.style.Setters.Add(new Setter(property, value));
     }
 
-    public void BasedOn<U>(IFluentStyle<U> basedOnStyle) where U : FrameworkElement
+    public void Extend<U>(IFluentStyle<U> basedOnStyle) where U : FrameworkElement
     {
       this.style.BasedOn = (basedOnStyle as IInternalFluentStyle)?.Style;
     }
