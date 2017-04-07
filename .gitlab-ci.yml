@@ -1,0 +1,6 @@
+before_script:
+    - nuget restore -NonInteractive
+
+build:
+ script:
+    - xbuild  "FluentWPF.sln"
