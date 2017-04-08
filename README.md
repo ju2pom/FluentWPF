@@ -1,4 +1,6 @@
-FluentWPF
+[![build status](https://gitlab.com/ju2pom/FluentWPF/badges/master/build.svg)](https://gitlab.com/ju2pom/FluentWPF/commits/master)
+
+# FluentWPF
 
 The goal of this library is to replace Xaml with C# to describe UI.
 
