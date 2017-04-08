@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using FluentWPFAPI.ThemeApi;
+using FluentWPFAPI.ThemeApi.Style;
 using FluentWPFAPI.ThemeApi.Template;
 
 namespace FluentWPF
@@ -18,7 +19,7 @@ namespace FluentWPF
           .TemplateBinding(ContentPresenter.ContentProperty, ContentControl.ContentProperty))
         .AsControlTemplate<Button>();
 
-      var style = StyleExtensions.Style<Button>()
+      var style = StyleExtensions.Create()
         .Set(Control.ForegroundProperty, colors.Text.Normal)
         .Set(FrameworkElement.WidthProperty, 25d)
         .Set(FrameworkElement.HeightProperty, 25d)
@@ -27,7 +28,7 @@ namespace FluentWPF
         .Then(Control.BackgroundProperty, colors.Control.Over)
         .EndWhen()
         .Template(template)
-        .Get();
+        .AsStyle<Button>();
 
       this.Add(typeof(Button), style);
     }

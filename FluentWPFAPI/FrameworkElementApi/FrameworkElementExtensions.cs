@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows;
-using FluentWPFAPI.ThemeApi;
 
 using System.Linq.Expressions;
 using System.Reflection;
+using FluentWPFAPI.ThemeApi.Style;
 
 namespace FluentWPFAPI.FrameworkElementApi
 {
@@ -33,7 +33,7 @@ namespace FluentWPFAPI.FrameworkElementApi
       return item;
     }
 
-    public static IFluentItem<T> Style<T>(this IFluentItem<T> item, string key)
+    public static IFluentItem<T> UseStyle<T>(this IFluentItem<T> item, string key)
       where T : FrameworkElement
     {
       Get(item).Style = Application.Current.Resources[key] as Style;
@@ -41,7 +41,7 @@ namespace FluentWPFAPI.FrameworkElementApi
       return item;
     }
 
-    public static IFluentItem<T> Style<T>(this IFluentItem<T> item, Style style)
+    public static IFluentItem<T> UseStyle<T>(this IFluentItem<T> item, Style style)
       where T : FrameworkElement
     {
       Get(item).Style = style;
@@ -49,7 +49,7 @@ namespace FluentWPFAPI.FrameworkElementApi
       return item;
     }
 
-    public static IFluentItem<T> Style<T>(this IFluentItem<T> item, IFluentStyle<T> style)
+    public static IFluentItem<T> UseStyle<T>(this IFluentItem<T> item, IFluentStyle style)
       where T : FrameworkElement
     {
       style.Apply(Get(item));

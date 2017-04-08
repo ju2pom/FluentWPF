@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Shapes;
 using FluentWPFAPI.ThemeApi;
+using FluentWPFAPI.ThemeApi.Style;
 using FluentWPFAPI.ThemeApi.Template;
 
 namespace FluentWPF
@@ -27,7 +28,7 @@ namespace FluentWPF
           .TemplateBinding(ContentPresenter.ContentProperty, ContentControl.ContentProperty))
         .AsControlTemplate<CheckBox>();
 
-      var style = StyleExtensions.Style<CheckBox>()
+      var style = StyleExtensions.Create()
         .Set(Control.ForegroundProperty, colors.Text.Normal)
         .When(ToggleButton.IsCheckedProperty)
         .Is(true)
@@ -38,15 +39,17 @@ namespace FluentWPF
         .Is(true)
         .Then(Control.BackgroundProperty, colors.Control.Over)
         .EndWhen()
+/*
         .When(x => x.ActualWidth > 100)
         .Then(ContentControl.ContentProperty, null)
         .EndWhen()
+*/
         .When(FrameworkElement.TagProperty)
         .Is("test")
         .Then(ContentControl.ContentProperty, null)
         .EndWhen()
         .Template(template)
-        .Get();
+        .AsStyle<CheckBox>();
 
       this.Add(typeof(CheckBox), style);
     }

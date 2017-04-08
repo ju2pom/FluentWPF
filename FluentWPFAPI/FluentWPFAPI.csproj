@@ -60,7 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StackPanelApi\StackPanelExtenstions.cs" />
     <Compile Include="ThemeApi\ColorPack.cs" />
-    <Compile Include="ThemeApi\FluentStyle.cs" />
+    <Compile Include="ThemeApi\Style\FluentStyle.cs" />
     <Compile Include="ThemeApi\FluentTheme.cs" />
     <Compile Include="ThemeApi\FluentTrigger.cs" />
     <Compile Include="ThemeApi\IColorPack.cs" />
@@ -68,9 +68,9 @@
     <Compile Include="ThemeApi\Template\FluentTemplateItemWithChild.cs" />
     <Compile Include="ThemeApi\Template\IFluentTemplateItem.cs" />
     <Compile Include="ThemeApi\IFluentTheme.cs" />
-    <Compile Include="ThemeApi\IStyle.cs" />
+    <Compile Include="ThemeApi\Style\IFluentStyle.cs" />
     <Compile Include="ThemeApi\IThemeColors.cs" />
-    <Compile Include="ThemeApi\StyleExtensions.cs" />
+    <Compile Include="ThemeApi\Style\StyleExtensions.cs" />
     <Compile Include="ThemeApi\Template\IFluentTemplateItemWithChild.cs" />
     <Compile Include="ThemeApi\Template\TemplateExtensions.cs" />
     <Compile Include="ThemeApi\ThemeColors.cs" />
