@@ -1,11 +1,21 @@
+variables:
+  Solution: FluentWPF.sln
+
+before_script:
+  - "echo off"
+  - 'call "%VS140COMNTOOLS%\vsvars32.bat"'
+  # output environment variables (usefull for debugging, propably not what you want to do if your ci server is public)
+  - echo.
+  - set
+  - echo.
+
 stages:
   - build
 
 build:
- stage: build
- script:
-  - 'msbuild FluentWPF.sln /t:Clean,ReBuild /p:Configuration=Debug;Platform="Any CPU"'
-#  - 'nunit-console my-test-project/my-test-project.csproj'
-  - 'msbuild FluentWPF.sln /t:ReBuild /p:Configuration=Release;Platform="Any CPU"'
- only:
-   - master
+  stage: build
+  script:
+  - echo building...
+  - 'msbuild.exe "%Solution%"'
+  except:
+  - tags
