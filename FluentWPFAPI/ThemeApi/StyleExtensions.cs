@@ -50,6 +50,15 @@ namespace FluentWPFAPI.ThemeApi
       return fluentTrigger;
     }
 
+    public static IFluentTrigger<T> When<T>(this IFluentStyle<T> fluentStyle, Func<T, bool> predicate)
+  where T : FrameworkElement
+    {
+      var fluentTrigger = fluentStyle.AddTrigger(Control.TagProperty);
+      fluentTrigger.SetValue(predicate);
+
+      return fluentTrigger;
+    }
+
     public static IFluentStyle<T> Call<T>(this IFluentTrigger<T> fluentTrigger, Action<T> action)
       where T : FrameworkElement
     {

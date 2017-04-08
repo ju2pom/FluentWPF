@@ -65,11 +65,13 @@
     <Compile Include="ThemeApi\FluentTrigger.cs" />
     <Compile Include="ThemeApi\IColorPack.cs" />
     <Compile Include="ThemeApi\Template\FluentTemplateItem.cs" />
+    <Compile Include="ThemeApi\Template\FluentTemplateItemWithChild.cs" />
     <Compile Include="ThemeApi\Template\IFluentTemplateItem.cs" />
     <Compile Include="ThemeApi\IFluentTheme.cs" />
     <Compile Include="ThemeApi\IStyle.cs" />
     <Compile Include="ThemeApi\IThemeColors.cs" />
     <Compile Include="ThemeApi\StyleExtensions.cs" />
+    <Compile Include="ThemeApi\Template\IFluentTemplateItemWithChild.cs" />
     <Compile Include="ThemeApi\Template\TemplateExtensions.cs" />
     <Compile Include="ThemeApi\ThemeColors.cs" />
   </ItemGroup>
