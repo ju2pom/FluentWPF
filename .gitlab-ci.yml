@@ -1,6 +1,11 @@
-before_script:
-    - nuget restore -NonInteractive
+stages:
+  - build
 
 build:
+ stage: build
  script:
-    - xbuild  "FluentWPF.sln"
+  - 'msbuild FluentWPF.sln /t:Clean,ReBuild /p:Configuration=Debug;Platform="Any CPU"'
+#  - 'nunit-console my-test-project/my-test-project.csproj'
+  - 'msbuild FluentWPF.sln /t:ReBuild /p:Configuration=Release;Platform="Any CPU"'
+ only:
+   - master
