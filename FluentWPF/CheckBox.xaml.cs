@@ -5,7 +5,7 @@ using System.Windows.Shapes;
 using FluentWPFAPI.ThemeApi;
 using FluentWPFAPI.ThemeApi.Style;
 using FluentWPFAPI.ThemeApi.Template;
-using FluentWPFAPI.ThemeApi.Trigger;
+using FluentWPFAPI.ThemeApi.Triggers;
 
 namespace FluentWPF
 {

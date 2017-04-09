@@ -1,6 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
-using FluentWPFAPI.ThemeApi.Trigger;
+using FluentWPFAPI.ThemeApi.Triggers;
 
 //using System.Windows.Interactivity;
 //using TriggerAction = System.Windows.Interactivity.TriggerAction;
@@ -35,8 +35,7 @@ namespace FluentWPFAPI.ThemeApi.Style
 
     public void AddTrigger(IFluentTrigger fluentTrigger)
     {
-      FluentTrigger trigger = (fluentTrigger as FluentTrigger);
-      this.style.Triggers.Add(trigger);
+      this.style.Triggers.Add(fluentTrigger.AsTrigger());
     }
 
     public void Apply(FrameworkElement element)

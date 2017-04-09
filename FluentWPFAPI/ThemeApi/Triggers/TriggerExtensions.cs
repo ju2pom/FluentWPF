@@ -1,20 +1,18 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 
-namespace FluentWPFAPI.ThemeApi.Trigger
+namespace FluentWPFAPI.ThemeApi.Triggers
 {
   public static class TriggerExtensions
   {
     public static IFluentTrigger Property(DependencyProperty property)
     {
-      FluentTrigger fluentTrigger = new FluentTrigger(null);
-      fluentTrigger.Property = property;
-
-      return fluentTrigger;
+      return new FluentTrigger(property);
     }
 
     public static IFluentTrigger Is(this IFluentTrigger fluentTrigger, object value)
     {
-      fluentTrigger.SetValue(value);
+      fluentTrigger.Value = value;
 
       return fluentTrigger;
     }
@@ -26,6 +24,14 @@ namespace FluentWPFAPI.ThemeApi.Trigger
       return fluentTrigger;
     }
 
+    public static Trigger AsTrigger(this IFluentTrigger fluentTrigger)
+    {
+      Trigger trigger = new Trigger { Property = fluentTrigger.Property, Value = fluentTrigger.Value };
+
+      fluentTrigger.Setters.ToList().ForEach(x => trigger.Setters.Add(x));
+
+      return trigger;
+    }
 
     /*    public static IFluentTrigger When<T>(this IFluentStyle fluentStyle, Func<T, bool> predicate)
           where T : FrameworkElement

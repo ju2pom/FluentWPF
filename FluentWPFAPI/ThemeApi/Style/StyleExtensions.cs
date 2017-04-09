@@ -1,7 +1,6 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using FluentWPFAPI.ThemeApi.Trigger;
+using FluentWPFAPI.ThemeApi.Triggers;
 
 namespace FluentWPFAPI.ThemeApi.Style
 {

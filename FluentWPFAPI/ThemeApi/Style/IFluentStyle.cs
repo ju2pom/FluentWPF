@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using FluentWPFAPI.ThemeApi.Trigger;
+using FluentWPFAPI.ThemeApi.Triggers;
 
 namespace FluentWPFAPI.ThemeApi.Style
 {
