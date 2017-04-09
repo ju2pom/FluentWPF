@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using FluentWPFAPI.ThemeApi.Triggers;
@@ -7,40 +9,35 @@ using FluentWPFAPI.ThemeApi.Triggers;
 
 namespace FluentWPFAPI.ThemeApi.Style
 {
-  internal class FluentStyle : System.Windows.Style, IFluentStyle, IInternalFluentStyle
+  internal class FluentStyle : IFluentStyle
   {
-    private readonly System.Windows.Style style;
+    private readonly List<Setter> setters;
+    private readonly List<IFluentTrigger> triggers;
 
     public FluentStyle()
     {
-      this.style = new System.Windows.Style();
+      this.setters = new List<Setter>();
+      this.triggers = new List<IFluentTrigger>();
     }
 
-    System.Windows.Style IInternalFluentStyle.Style => this.style;
+    public IEnumerable<Setter> Setters => this.setters;
 
-    public void SetTemplate(ControlTemplate template)
-    {
-      this.style.Setters.Add(new Setter(Control.TemplateProperty, template));
-    }
+    public IEnumerable<IFluentTrigger> Triggers => this.triggers;
 
     public void AddSetter(DependencyProperty property, object value)
     {
-      this.style.Setters.Add(new Setter(property, value));
-    }
-
-    public void Extend(IFluentStyle basedOnStyle)
-    {
-      this.style.BasedOn = (basedOnStyle as IInternalFluentStyle)?.Style;
+      this.setters.Add(new Setter(property, value));
     }
 
     public void AddTrigger(IFluentTrigger fluentTrigger)
     {
-      this.style.Triggers.Add(fluentTrigger.AsTrigger());
+      this.triggers.Add(fluentTrigger);
     }
 
-    public void Apply(FrameworkElement element)
+    public void Extend(IFluentStyle basedOnStyle)
     {
-      element.Style = this.style;
+      this.setters.AddRange(basedOnStyle.Setters);
+      this.triggers.AddRange(basedOnStyle.Triggers);
     }
   }
 }

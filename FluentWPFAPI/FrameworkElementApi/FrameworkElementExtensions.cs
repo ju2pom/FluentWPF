@@ -52,7 +52,7 @@ namespace FluentWPFAPI.FrameworkElementApi
     public static IFluentItem<T> UseStyle<T>(this IFluentItem<T> item, IFluentStyle style)
       where T : FrameworkElement
     {
-      style.Apply(Get(item));
+      Get(item).Style = style.AsStyle<T>();
 
       return item;
     }

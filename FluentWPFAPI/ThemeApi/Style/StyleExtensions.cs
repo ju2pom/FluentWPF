@@ -35,8 +35,18 @@ namespace FluentWPFAPI.ThemeApi.Style
     public static System.Windows.Style AsStyle<T>(this IFluentStyle fluentStyle)
       where T : FrameworkElement
     {
-      System.Windows.Style style = (fluentStyle as IInternalFluentStyle).Style;
+      System.Windows.Style style = new System.Windows.Style();
       style.TargetType = typeof(T);
+
+      foreach (IFluentTrigger trigger in fluentStyle.Triggers)
+      {
+        style.Triggers.Add(trigger.AsTrigger());
+      }
+
+      foreach (Setter setter in fluentStyle.Setters)
+      {
+        style.Setters.Add(setter);
+      }
 
       return style;
     }
