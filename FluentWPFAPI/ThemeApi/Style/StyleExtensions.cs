@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using FluentWPFAPI.ThemeApi.Trigger;
 
 namespace FluentWPFAPI.ThemeApi.Style
 {
@@ -25,46 +26,11 @@ namespace FluentWPFAPI.ThemeApi.Style
       return fluentStyle;
     }
 
-    public static IFluentTrigger When(this IFluentStyle fluentStyle, DependencyProperty property)
+    public static IFluentStyle When(this IFluentStyle fluentStyle, IFluentTrigger fluentTrigger)
     {
-      return fluentStyle.AddTrigger(property);
-    }
+      fluentStyle.AddTrigger(fluentTrigger);
 
-    public static IFluentTrigger Is(this IFluentTrigger fluentTrigger, object value)
-    {
-      fluentTrigger.SetValue(value);
-
-      return fluentTrigger;
-    }
-
-/*    public static IFluentTrigger When<T>(this IFluentStyle fluentStyle, Func<T, bool> predicate)
-      where T : FrameworkElement
-    {
-      var fluentTrigger = fluentStyle.AddTrigger(Control.TagProperty);
-      fluentTrigger.SetValue(predicate);
-
-      return fluentTrigger;
-    }
-
-    public static IFluentStyle<T> Call<T>(this IFluentTrigger fluentTrigger, Action<T> action)
-      where T : FrameworkElement
-    {
-      fluentTrigger.AddCallback(action);
-
-      return (fluentTrigger as FluentTrigger<T>)?.FluentStyle;
-    }
-    */
-
-    public static IFluentTrigger Then(this IFluentTrigger fluentTrigger, DependencyProperty property, object value)
-    {
-      fluentTrigger.AddSetter(property, value);
-
-      return fluentTrigger;
-    }
-
-    public static IFluentStyle EndWhen(this IFluentTrigger fluentTrigger)
-    {
-      return (fluentTrigger as FluentTrigger).FluentStyle;
+      return fluentStyle;
     }
 
     public static System.Windows.Style AsStyle<T>(this IFluentStyle fluentStyle)

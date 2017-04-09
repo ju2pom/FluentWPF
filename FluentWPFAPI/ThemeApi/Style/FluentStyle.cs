@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using FluentWPFAPI.ThemeApi.Trigger;
 
 //using System.Windows.Interactivity;
 //using TriggerAction = System.Windows.Interactivity.TriggerAction;
@@ -32,16 +33,10 @@ namespace FluentWPFAPI.ThemeApi.Style
       this.style.BasedOn = (basedOnStyle as IInternalFluentStyle)?.Style;
     }
 
-    public IFluentTrigger AddTrigger(DependencyProperty property)
+    public void AddTrigger(IFluentTrigger fluentTrigger)
     {
-      FluentTrigger trigger = new FluentTrigger(this)
-      {
-        Property = property
-      };
-
+      FluentTrigger trigger = (fluentTrigger as FluentTrigger);
       this.style.Triggers.Add(trigger);
-
-      return trigger;
     }
 
     public void Apply(FrameworkElement element)

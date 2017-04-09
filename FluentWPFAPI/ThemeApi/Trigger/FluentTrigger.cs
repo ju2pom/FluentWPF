@@ -2,9 +2,9 @@ using System;
 using System.Windows;
 using FluentWPFAPI.ThemeApi.Style;
 
-namespace FluentWPFAPI.ThemeApi
+namespace FluentWPFAPI.ThemeApi.Trigger
 {
-  internal class FluentTrigger : Trigger, IFluentTrigger
+  internal class FluentTrigger : System.Windows.Trigger, IFluentTrigger
   {
     public FluentTrigger(IFluentStyle fluentStyle)
     {

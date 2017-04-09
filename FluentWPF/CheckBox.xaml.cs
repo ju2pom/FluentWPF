@@ -5,6 +5,7 @@ using System.Windows.Shapes;
 using FluentWPFAPI.ThemeApi;
 using FluentWPFAPI.ThemeApi.Style;
 using FluentWPFAPI.ThemeApi.Template;
+using FluentWPFAPI.ThemeApi.Trigger;
 
 namespace FluentWPF
 {
@@ -30,26 +31,23 @@ namespace FluentWPF
 
       var style = StyleExtensions.Create()
         .Set(Control.ForegroundProperty, colors.Text.Normal)
-        .When(ToggleButton.IsCheckedProperty)
-        .Is(true)
-        .Then(Control.FontWeightProperty, FontWeights.Bold)
-        .Then(Control.ForegroundProperty, colors.Control.Selected)
-        .EndWhen()
-        .When(UIElement.IsMouseOverProperty)
-        .Is(true)
-        .Then(Control.BackgroundProperty, colors.Control.Over)
-        .EndWhen()
-/*
-        .When(x => x.ActualWidth > 100)
-        .Then(ContentControl.ContentProperty, null)
-        .EndWhen()
-*/
-        .When(FrameworkElement.TagProperty)
-        .Is("test")
-        .Then(ContentControl.ContentProperty, null)
-        .EndWhen()
+        .When(TriggerExtensions.Property(ToggleButton.IsCheckedProperty)
+          .Is(true)
+          .Then(Control.FontWeightProperty, FontWeights.Bold)
+          .Then(Control.ForegroundProperty, colors.Control.Selected))
+        .When(TriggerExtensions.Property(UIElement.IsMouseOverProperty)
+          .Is(true)
+          .Then(Control.BackgroundProperty, colors.Control.Over))
+        .When(TriggerExtensions.Property(FrameworkElement.TagProperty)
+          .Is("test")
+          .Then(ContentControl.ContentProperty, null))
         .Template(template)
         .AsStyle<CheckBox>();
+      /*
+              .When(x => x.ActualWidth > 100)
+              .Then(ContentControl.ContentProperty, null)
+              .EndWhen()
+      */
 
       this.Add(typeof(CheckBox), style);
     }

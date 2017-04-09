@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using FluentWPFAPI.ThemeApi;
 using FluentWPFAPI.ThemeApi.Style;
 using FluentWPFAPI.ThemeApi.Template;
+using FluentWPFAPI.ThemeApi.Trigger;
 
 namespace FluentWPF
 {
@@ -23,10 +24,9 @@ namespace FluentWPF
         .Set(Control.ForegroundProperty, colors.Text.Normal)
         .Set(FrameworkElement.WidthProperty, 25d)
         .Set(FrameworkElement.HeightProperty, 25d)
-        .When(UIElement.IsMouseOverProperty)
-        .Is(true)
-        .Then(Control.BackgroundProperty, colors.Control.Over)
-        .EndWhen()
+        .When(TriggerExtensions.Property(UIElement.IsMouseOverProperty)
+          .Is(true)
+          .Then(Control.BackgroundProperty, colors.Control.Over))
         .Template(template)
         .AsStyle<Button>();
 
