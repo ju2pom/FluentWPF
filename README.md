@@ -88,27 +88,24 @@ var template = TemplateExtensions.Create<Border>()
 *FluentWPF*
 
 ```csharp
-var template = TemplateExtensions.Template<CheckBox>()
-  .Factory<CheckBox, Border>()
-  .Bind(Control.BackgroundProperty, Control.BackgroundProperty)
-  .Factory<CheckBox, ContentPresenter>()
-  .Set(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Center)
-  .Set(FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Center)
-  .Bind(ContentPresenter.ContentProperty, ContentControl.ContentProperty)
-  .Get();
+var TemplateExtensions.Create<Border>()
+    .TemplateBinding(Control.BackgroundProperty, Control.BackgroundProperty)
+    .Contains<ContentPresenter>()
+    .Set(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Center)
+    .Set(FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Center)
+    .TemplateBinding(ContentPresenter.ContentProperty, ContentControl.ContentProperty)
+    .AsControlTemplate<CheckBox>();
 
-var NiceCheckBox = StyleExtensions.Style<CheckBox>()
-  .When(ToggleButton.IsCheckedProperty)
-  .Is(true)
-  .Then(Control.FontWeightProperty, FontWeights.Bold)
-  .Then(Control.ForegroundProperty, new SolidColorBrush(Colors.DarkBlue))
-  .EndWhen()
-  .When(UIElement.IsMouseOverProperty)
-  .Is(true)
-  .Then(Control.BackgroundProperty, new SolidColorBrush(Colors.Bisque))
-  .EndWhen()
-  .Template(template)
-  .Get();
+var NiceCheckBox = StyleExtensions.Create()
+    .When(TriggerExtensions.Property(ToggleButton.IsCheckedProperty)
+      .Is(true)
+      .Then(Control.FontWeightProperty, FontWeights.Bold)
+      .Then(Control.ForegroundProperty, new SolidColorBrush(Colors.DarkBlue)))
+    .When(TriggerExtensions.Property(UIElement.IsMouseOverProperty)
+      .Is(true)
+      .Then(Control.BackgroundProperty, new SolidColorBrush(Colors.Bisque)))
+    .Template(template)
+    .AsStyle<CheckBox>();
 ```    
 *XAML*
 
