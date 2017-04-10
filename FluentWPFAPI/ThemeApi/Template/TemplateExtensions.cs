@@ -43,6 +43,22 @@ namespace FluentWPFAPI.ThemeApi.Template
       return templateItem;
     }
 
+    public static IFluentTemplateItem Center(this IFluentTemplateItem templateItem)
+    {
+      templateItem.Set(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Center);
+      templateItem.Set(FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Center);
+
+      return templateItem;
+    }
+
+    public static IFluentTemplateItem Size(this IFluentTemplateItem templateItem, double width, double height)
+    {
+      templateItem.Set(FrameworkElement.WidthProperty, width);
+      templateItem.Set(FrameworkElement.HeightProperty, height);
+
+      return templateItem;
+    }
+
     public static ControlTemplate AsControlTemplate<T>(this IFluentTemplateItem templateItem)
       where T : FrameworkElement
     {

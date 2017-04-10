@@ -3,6 +3,7 @@ using System.Windows;
 
 using System.Linq.Expressions;
 using System.Reflection;
+using FluentWPFAPI.ThemeApi.Binding;
 using FluentWPFAPI.ThemeApi.Style;
 
 namespace FluentWPFAPI.FrameworkElementApi
@@ -18,7 +19,7 @@ namespace FluentWPFAPI.FrameworkElementApi
     }
 
     public static IFluentItem<T> Set<T>(this IFluentItem<T> item, Expression<Func<T, object>> expression, object value)
-  where T : FrameworkElement
+      where T : FrameworkElement
     {
       var memberSelectorExpression = expression.Body as MemberExpression;
       if (memberSelectorExpression != null)
@@ -29,6 +30,15 @@ namespace FluentWPFAPI.FrameworkElementApi
           property.SetValue(Get(item), value, null);
         }
       }
+
+      return item;
+    }
+
+    public static IFluentItem<T> Bind<T>(this IFluentItem<T> item, IFluentBinding fluentBinding)
+      where T : FrameworkElement
+    {
+      FluentItem<T> fluentItem = (FluentItem<T>)item;
+      fluentItem.AddBinding(fluentBinding);
 
       return item;
     }

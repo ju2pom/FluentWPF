@@ -45,7 +45,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BindingApi\BindingExtensions.cs" />
     <Compile Include="ButtonApi\ButtonExtensions.cs" />
     <Compile Include="ContentControlApi\ContentControlExtensions.cs" />
     <Compile Include="FluentItem.cs" />
@@ -53,7 +52,9 @@
     <Compile Include="GridApi\GridExtensions.cs" />
     <Compile Include="GridApi\GridCell.cs" />
     <Compile Include="GridApi\IGridCell.cs" />
-    <Compile Include="IFluentBinding.cs" />
+    <Compile Include="ThemeApi\Binding\BindingExtensions.cs" />
+    <Compile Include="ThemeApi\Binding\FluentBinding.cs" />
+    <Compile Include="ThemeApi\Binding\IFluentBinding.cs" />
     <Compile Include="IFluentItem.cs" />
     <Compile Include="ImageApi\ImageExtensions.cs" />
     <Compile Include="ProgressApi\ProgressExtensions.cs" />

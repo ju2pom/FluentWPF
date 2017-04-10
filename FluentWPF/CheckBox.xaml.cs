@@ -20,13 +20,10 @@ namespace FluentWPF
         .Contains<StackPanel>()
         .Set(StackPanel.OrientationProperty, Orientation.Horizontal)
         .Contains(TemplateExtensions.Create<Ellipse>()
-          .Set(FrameworkElement.WidthProperty, 8d)
-          .Set(FrameworkElement.HeightProperty, 8d)
+          .Size(8, 8)
           .TemplateBinding(Shape.FillProperty, Control.ForegroundProperty))
         .Contains(TemplateExtensions.Create<ContentPresenter>()
-          .Set(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Center)
-          .Set(FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Center)
-          .TemplateBinding(ContentPresenter.ContentProperty, ContentControl.ContentProperty))
+          .Center())
         .AsControlTemplate<CheckBox>();
 
       var style = StyleExtensions.Create()

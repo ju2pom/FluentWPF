@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using FluentWPFAPI.ThemeApi.Binding;
 
 namespace FluentWPFAPI
 {
@@ -19,10 +20,7 @@ namespace FluentWPFAPI
 
     public T Element { get; }
 
-    object IInternalObjectItem.Element
-    {
-      get { return Element; }
-    }
+    object IInternalObjectItem.Element => Element;
 
     public T Initialize()
     {
@@ -46,7 +44,7 @@ namespace FluentWPFAPI
       bindings
         .OfType<FluentBinding>()
         .ToList()
-        .ForEach(x => x.Apply());
+        .ForEach(x => x.AsBinding(this.Element));
 
       children.ForEach(x => x.Initialize());
     }
