@@ -83,7 +83,7 @@ var template = TemplateExtensions.Create<Border>()
       .TemplateBinding(ContentPresenter.ContentProperty, ContentControl.ContentProperty))
     .AsControlTemplate<CheckBox>();
 ```
-# Comparison between FluentWPF and Xaml:
+# FluentWPF vs Xaml:
 
 *FluentWPF*
 
@@ -110,31 +110,28 @@ var NiceCheckBox = StyleExtensions.Create()
 *XAML*
 
 ```xml
+<ControlTemplate x:Key="NiceCheckBoxTemplate" TargetType="CheckBox">
+  <Border x:Name="Border"
+    Background="{TemplateBinding Background}">
+    <ContentPresenter
+      HorizontalAlignment="Center"
+      VerticalAlignment="Center"
+      />
+  </Border>
+</ControlTemplate>
+
 <Style x:Key="NiceCheckBox" TargetType="CheckBox">
-    <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="CheckBox">
-          <Border x:Name="Border"
-            Background="{TemplateBinding Background}"
-            >
-            <ContentPresenter
-              HorizontalAlignment="Center"
-              VerticalAlignment="Center"
-              />
-          </Border>
-          <ControlTemplate.Triggers>
-            <Trigger Property="IsChecked" Value="True">
-              <Setter Property="FontWeight" Value="Bold" />
-              <Setter Property="Foreground" Value="DarkBlue" />
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
-              <Setter Property="Background" Value="Bisque" />
-            </Trigger>
-          </ControlTemplate.Triggers>
-        </ControlTemplate>
-      </Setter.Value>
-    </Setter>
-  </Style>
+  <Setter Property="Template" Value="{StaticResource NiceCheckBoxTemplate}">
+  <Style.Triggers>
+    <Trigger Property="IsChecked" Value="True">
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Foreground" Value="DarkBlue" />
+    </Trigger>
+    <Trigger Property="IsMouseOver" Value="True">
+      <Setter Property="Background" Value="Bisque" />
+    </Trigger>
+  </Style.Triggers>
+</Style>
   ```
   
 # Roadmap
