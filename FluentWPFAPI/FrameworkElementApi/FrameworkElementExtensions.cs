@@ -215,8 +215,9 @@ namespace FluentWPFAPI.FrameworkElementApi
     }
 
     private static T Get<T>(IFluentItem<T> item)
+      where T : FrameworkElement
     {
-      return ((IInternalFluentItem<T>) item).Element;
+      return item.Element;
     }
   }
 }

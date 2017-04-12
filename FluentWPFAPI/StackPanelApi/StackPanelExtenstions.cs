@@ -10,8 +10,7 @@ namespace FluentWPFAPI.StackPanelApi
     {
       StackPanel stackPanel = Get(fluentItem);
 
-      UIElement element = (item as IInternalObjectItem)?.Element as UIElement;
-      stackPanel.Children.Add(element);
+      stackPanel.Children.Add(item.Element);
 
       return fluentItem;
     }

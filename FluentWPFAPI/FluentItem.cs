@@ -5,7 +5,7 @@ using FluentWPFAPI.ThemeApi.Binding;
 
 namespace FluentWPFAPI
 {
-  internal class FluentItem<T> : IInternalFluentItem<T>, IFluentItem<T>
+  internal class FluentItem<T> : IFluentItem<T>
     where T : FrameworkElement
   {
     private readonly List<IFluentBinding> bindings;
@@ -20,7 +20,7 @@ namespace FluentWPFAPI
 
     public T Element { get; }
 
-    object IInternalObjectItem.Element => Element;
+    FrameworkElement IFluentItem.Element => Element;
 
     public T Initialize()
     {

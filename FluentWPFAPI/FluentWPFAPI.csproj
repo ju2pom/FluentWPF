@@ -47,8 +47,10 @@
   <ItemGroup>
     <Compile Include="ButtonApi\ButtonExtensions.cs" />
     <Compile Include="ContentControlApi\ContentControlExtensions.cs" />
+    <Compile Include="DockPanelApi\DockPanelExtensions.cs" />
     <Compile Include="FluentItem.cs" />
     <Compile Include="FrameworkElementApi\FrameworkElementExtensions.cs" />
+    <Compile Include="GridApi\GridCellExtensions.cs" />
     <Compile Include="GridApi\GridExtensions.cs" />
     <Compile Include="GridApi\GridCell.cs" />
     <Compile Include="GridApi\IGridCell.cs" />

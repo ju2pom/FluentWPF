@@ -1,39 +1,88 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace FluentWPFAPI.GridApi
 {
   internal class GridCell : IGridCell
   {
-    public GridCell(IFluentItem grid, int row, int column)
+    public GridCell()
     {
-      Grid = grid;
-      Row = row;
-      Column = column;
       RowSpan = 1;
       ColSpan = 1;
     }
 
-    internal IFluentItem Grid { get; }
+    public int Row { get; set; }
 
-    internal int Row { get; }
+    public int Column { get; set; }
 
-    internal int Column { get; }
+    public int RowSpan { get; set; }
 
-    internal int RowSpan { get; set; }
+    public int ColSpan { get; set; }
 
-    internal int ColSpan { get; set; }
+    public GridLength? Width { get; set; }
 
-    internal GridLength? Width { get; set; }
+    public GridLength? Height { get; set; }
 
-    internal GridLength? Height { get; set; }
+    public IFluentItem Content { get; set; }
 
-    /*    public static implicit operator Grid(GridCell gridCell)
-        {
-          if (gridCell.Element == null)
-            throw new InvalidOperationException(
-              $"You should setup the content of this cell before ({gridCell.Row}, {gridCell.Column})");
+    public void Insert(Grid grid)
+    {
+      this.CreateRowAndColumnIfNeeded(grid);
+      FrameworkElement element = this.Content.Element;
 
-          return gridCell.Grid;
-        }*/
+      grid.Children.Add(element);
+      Grid.SetRow(element, this.Row);
+      Grid.SetColumn(element, this.Column);
+      Grid.SetRowSpan(element, this.RowSpan);
+      Grid.SetColumnSpan(element, this.ColSpan);
+    }
+
+    internal static bool TryGetGridLength(string value, out GridLength gridLength)
+    {
+      double size;
+      if (double.TryParse(value, out size))
+      {
+        gridLength = new GridLength(size, GridUnitType.Star);
+
+        return true;
+      }
+      else if (string.Compare(value, "auto", StringComparison.InvariantCultureIgnoreCase) == 0)
+      {
+        gridLength = new GridLength(0, GridUnitType.Auto);
+
+        return true;
+      }
+      else if (string.Compare(value, "*", StringComparison.InvariantCultureIgnoreCase) == 0)
+      {
+        gridLength = new GridLength(1, GridUnitType.Star);
+
+        return true;
+      }
+
+      gridLength = default(GridLength);
+
+      return false;
+    }
+
+    private void CreateRowAndColumnIfNeeded(Grid grid)
+    {
+      GridLength defaultWidth = this.Width ?? new GridLength(0, GridUnitType.Auto);
+      GridLength defaultHeight = this.Height ?? new GridLength(0, GridUnitType.Auto);
+
+      int columnsToAdd = this.Column + this.ColSpan - grid.ColumnDefinitions.Count;
+      while (columnsToAdd > 0)
+      {
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = defaultWidth });
+        columnsToAdd--;
+      }
+
+      int rowsToAdd = this.Row + this.RowSpan - grid.RowDefinitions.Count;
+      while (rowsToAdd > 0)
+      {
+        grid.RowDefinitions.Add(new RowDefinition { Height = defaultHeight });
+        rowsToAdd--;
+      }
+    }
   }
 }

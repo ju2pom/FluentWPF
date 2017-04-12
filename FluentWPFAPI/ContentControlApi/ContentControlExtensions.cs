@@ -15,10 +15,9 @@ namespace FluentWPFAPI.ContentControlApi
       where T : ContentControl
     {
       FluentItem<T> fluentItem = (FluentItem<T>) item;
-      IInternalObjectItem contentFluentItem = (IInternalObjectItem) content;
       fluentItem.AddChild(content);
 
-      fluentItem.Element.Content = contentFluentItem.Element;
+      fluentItem.Element.Content = content.Element;
 
       return item;
     }
