@@ -57,6 +57,8 @@ namespace FluentWPFAPI.DockPanelApi
     private static void Dock<T>(IFluentItem<DockPanel> dockPanel, IFluentItem<T> child, Dock? dock)
       where T : FrameworkElement
     {
+      dockPanel.AddChild(child);
+
       FluentItem<DockPanel> item = (FluentItem<DockPanel>)dockPanel;
       T childItem = ((FluentItem<T>)child).Element;
 

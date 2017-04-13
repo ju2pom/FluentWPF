@@ -10,6 +10,20 @@ namespace FluentWPFAPI.FrameworkElementApi
 {
   public static class FrameworkElementExtensions
   {
+    public static IFluentItem<T> AsFluent<T>(this T element)
+      where T : FrameworkElement
+    {
+      return new FluentItem<T>(element);
+    }
+
+    public static IFluentItem<T> DataContext<T>(this IFluentItem<T> fluentItem, object dataContext)
+      where T : FrameworkElement
+    {
+      fluentItem.Element.DataContext = dataContext;
+
+      return fluentItem;
+    }
+
     public static IFluentItem<T> Set<T>(this IFluentItem<T> item, DependencyProperty property, object value)
       where T : FrameworkElement
     {
@@ -37,8 +51,7 @@ namespace FluentWPFAPI.FrameworkElementApi
     public static IFluentItem<T> Bind<T>(this IFluentItem<T> item, IFluentBinding fluentBinding)
       where T : FrameworkElement
     {
-      FluentItem<T> fluentItem = (FluentItem<T>)item;
-      fluentItem.AddBinding(fluentBinding);
+      item.AddBinding(fluentBinding);
 
       return item;
     }

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using FluentWPFAPI.ThemeApi.Binding;
 
 namespace FluentWPFAPI
 {
@@ -6,7 +7,11 @@ namespace FluentWPFAPI
   {
     FrameworkElement Element { get; }
 
-    void Initialize();
+    void AddChild(IFluentItem child);
+
+    void AddBinding(IFluentBinding binding);
+
+    void Initialize(object dataContext);
   }
 
   public interface IFluentItem<T> : IFluentItem
@@ -14,6 +19,6 @@ namespace FluentWPFAPI
   {
     new T Element { get; }
 
-    new T Initialize();
+    new T Initialize(object dataContext);
   }
 }

@@ -22,9 +22,9 @@ namespace FluentWPFAPI
 
     FrameworkElement IFluentItem.Element => Element;
 
-    public T Initialize()
+    public T Initialize(object dataContext)
     {
-      (this as IFluentItem).Initialize();
+      (this as IFluentItem).Initialize(this.Element.DataContext ?? dataContext);
 
       return this.Element;
     }
@@ -39,14 +39,16 @@ namespace FluentWPFAPI
       children.Add(child);
     }
 
-    void IFluentItem.Initialize()
+    void IFluentItem.Initialize(object dataContext)
     {
+      this.Element.DataContext = dataContext;
+
       bindings
         .OfType<FluentBinding>()
         .ToList()
-        .ForEach(x => x.AsBinding(this.Element));
+        .ForEach(x => x.Bind(this.Element, this.Element.DataContext));
 
-      children.ForEach(x => x.Initialize());
+      children.ForEach(x => x.Initialize(dataContext));
     }
   }
 }

@@ -26,7 +26,7 @@ namespace FluentWPFAPI.GridApi
 
     public IFluentItem Content { get; set; }
 
-    public void Insert(Grid grid)
+    public void HostInGrid(Grid grid)
     {
       this.CreateRowAndColumnIfNeeded(grid);
       FrameworkElement element = this.Content.Element;

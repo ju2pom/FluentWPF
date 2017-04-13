@@ -19,11 +19,14 @@ namespace FluentWPF
 
     public MyWindow()
     {
-      this._content = new DockPanel {DataContext = new MyWindowDataContext()}
+      this._content = new DockPanel()
         .AsFluent()
         .Size(400, 150)
         .DockTop(new Menu()
-          .AsFluent())
+          .AsFluent()
+          .Bind(BindingExtensions
+            .Property(ItemsControl.ItemsSourceProperty)
+            .OneTime(nameof(MyWindowDataContext.MenuItems))))
         .Dock(new Grid()
           .AsFluent()
           .Set(x => x.Background, new SolidColorBrush(Colors.RosyBrown))
@@ -43,8 +46,8 @@ namespace FluentWPF
               .Center()
               .Contains("Shuffle")
               .Bind(BindingExtensions
-                .Property(ToggleButton.IsCheckedProperty)
-                .OneWay(nameof(MyWindowDataContext.IsShuffleEnabled)))))
+                .Property(ButtonBase.CommandProperty)
+                .OneWay(nameof(MyWindowDataContext.ShuffleCommand)))))
           .Cell(GridCellExtensions.Create()
             .Row(2).Column(2)
             .Contains(new CheckBox()
@@ -52,8 +55,8 @@ namespace FluentWPF
               .Center()
               .Contains("Loop")
               .Bind(BindingExtensions
-                .Property(ToggleButton.IsCheckedProperty)
-                .OneWay(nameof(MyWindowDataContext.IsLoopEnabled)))))
+                .Property(ButtonBase.CommandProperty)
+                .OneWay(nameof(MyWindowDataContext.LoopCommand)))))
           .Cell(GridCellExtensions.Create()
             .Row(3).Column(0)
             .AutoHeight()
@@ -79,7 +82,7 @@ namespace FluentWPF
               .Value(50)
               .MarginTop(10)
               .MarginBottom(10))))
-        .Initialize();
+        .Initialize(new MyWindowDataContext());
     }
 
     public FrameworkElement Create()

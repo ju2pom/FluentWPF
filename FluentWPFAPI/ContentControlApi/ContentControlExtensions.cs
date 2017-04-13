@@ -5,12 +5,6 @@ namespace FluentWPFAPI.ContentControlApi
 {
   public static class ContentControlExtensions
   {
-    public static IFluentItem<T> AsFluent<T>(this T element)
-      where T : FrameworkElement
-    {
-      return new FluentItem<T>(element);
-    }
-
     public static IFluentItem<T> Contains<T>(this IFluentItem<T> item, IFluentItem content)
       where T : ContentControl
     {
@@ -28,6 +22,7 @@ namespace FluentWPFAPI.ContentControlApi
       FluentItem<T> fluentItem = (FluentItem<T>) item;
       TextBlock element = new TextBlock { Text = content};
       fluentItem.Element.Content = element;
+      fluentItem.AddChild(new FluentItem<TextBlock>(element));
 
       return item;
     }

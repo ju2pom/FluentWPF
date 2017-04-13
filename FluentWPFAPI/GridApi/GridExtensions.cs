@@ -177,11 +177,9 @@ namespace FluentWPFAPI.GridApi
 
     public static IFluentItem<Grid> Cell(this IFluentItem<Grid> fluentItem, IGridCell cell)
     {
-      GridFluentItem item = (GridFluentItem)fluentItem;
-      GridCell gridCell = (GridCell) cell;
-
-      item.SetupCell(cell);
-      gridCell.Insert(item.Element);
+      (fluentItem as GridFluentItem)?.SetupCell(cell);
+      cell.HostInGrid(fluentItem.Element);
+      fluentItem.AddChild(cell.Content);
 
       return fluentItem;
     }

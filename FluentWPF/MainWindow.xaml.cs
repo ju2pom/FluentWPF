@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using FluentWPFAPI.ContentControlApi;
+using FluentWPFAPI.FrameworkElementApi;
 
 namespace FluentWPF
 {

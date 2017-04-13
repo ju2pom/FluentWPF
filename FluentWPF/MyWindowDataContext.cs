@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -10,13 +11,17 @@ namespace FluentWPF
     {
       LoopCommand = new RelayCommand(OnLoop);
       ShuffleCommand = new RelayCommand(OnShuffle);
+      this.MenuItems = new List<string> {"File", "Edit", "Help"};
     }
+
+    public IEnumerable<string> MenuItems { get; }
 
     public bool IsShuffleEnabled { get; private set; }
 
     public bool IsLoopEnabled { get; private set; }
 
     public ICommand LoopCommand { get; private set; }
+
     public ICommand ShuffleCommand { get; private set; }
 
     private void OnShuffle(object obj)

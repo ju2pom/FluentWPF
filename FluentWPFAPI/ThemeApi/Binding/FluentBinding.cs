@@ -18,19 +18,17 @@ namespace FluentWPFAPI.ThemeApi.Binding
 
     public IValueConverter Converter { get; set; }
 
-    public System.Windows.Data.Binding AsBinding(FrameworkElement element)
+    public void Bind(FrameworkElement element, object source)
     {
       System.Windows.Data.Binding binding = new System.Windows.Data.Binding
       {
-        Source = element.DataContext,
+        Source = source,
         Path = this.Path,
         Mode = this.Mode,
         Converter = this.Converter,
       };
 
       BindingOperations.SetBinding(element, this.property, binding);
-
-      return binding;
     }
   }
 }

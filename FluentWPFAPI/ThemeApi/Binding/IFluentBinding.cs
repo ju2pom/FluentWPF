@@ -10,5 +10,7 @@ namespace FluentWPFAPI.ThemeApi.Binding
     BindingMode Mode { get; set; }
 
     IValueConverter Converter { get; set; }
+
+    void Bind(FrameworkElement element, object source);
   }
 }

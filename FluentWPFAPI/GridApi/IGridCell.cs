@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace FluentWPFAPI.GridApi
 {
@@ -17,5 +18,7 @@ namespace FluentWPFAPI.GridApi
     GridLength? Height { get; set; }
 
     IFluentItem Content { get; set; }
+
+    void HostInGrid(Grid grid);
   }
 }
