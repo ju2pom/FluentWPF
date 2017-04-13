@@ -59,23 +59,33 @@ namespace FluentWPF
                 .Property(ButtonBase.CommandProperty)
                 .OneWay(nameof(MyWindowDataContext.LoopCommand)))))
           .Cell(GridCellExtensions.Create()
-            .Row(3).Column(0)
+            .Row(3).Column(0).Span(1, 3)
+            .AutoHeight()
+            .Contains(new TextBlock()
+              .AsFluent()
+              .Center()
+              .Bind(BindingExtensions
+                .Property(TextBlock.TextProperty)
+                .OneWay(nameof(MyWindowDataContext.SongTitle)))))
+          .Cell(GridCellExtensions.Create()
+            .Row(4).Column(0)
             .AutoHeight()
             .Contains(new Button()
               .AsFluent()
               .Contains("<<")))
           .Cell(GridCellExtensions.Create()
-            .Row(3).Column(1)
+            .Row(4).Column(1)
             .Contains(new Button()
               .AsFluent()
               .Contains(">")))
           .Cell(GridCellExtensions.Create()
-            .Row(3).Column(2)
+            .Row(4).Column(2)
             .Contains(new Button()
               .AsFluent()
-              .Contains(">>")))
+              .Contains(">>")
+              .On(Button.ClickEvent, OnNextSong)))
           .Cell(GridCellExtensions.Create()
-            .Row(4).Column(0).Span(1, 3)
+            .Row(5).Column(0).Span(1, 3)
             .Contains(new ProgressBar()
               .AsFluent()
               .Bind(BindingExtensions
@@ -87,6 +97,12 @@ namespace FluentWPF
               .MarginTop(10)
               .MarginBottom(10))))
         .Initialize(new MyWindowDataContext());
+    }
+
+    private void OnNextSong(object sender, RoutedEventArgs routedEventArgs)
+    {
+      Button btn = sender as Button;
+      btn.Foreground = new SolidColorBrush(Colors.Blue);
     }
 
     public FrameworkElement Create()

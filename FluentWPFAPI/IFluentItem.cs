@@ -11,6 +11,8 @@ namespace FluentWPFAPI
 
     void AddBinding(IFluentBinding binding);
 
+    void AddHandler(RoutedEvent ev, RoutedEventHandler handler);
+
     void Initialize(object dataContext);
   }
 

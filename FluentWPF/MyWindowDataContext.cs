@@ -13,9 +13,12 @@ namespace FluentWPF
       ShuffleCommand = new RelayCommand(OnShuffle);
       this.MenuItems = new List<string> {"File", "Edit", "Help"};
       this.Progress = 30.5;
+      this.SongTitle = "Queen - No more of that Jazz";
     }
 
     public double Progress { get; }
+
+    public string SongTitle { get; }
 
     public IEnumerable<string> MenuItems { get; }
 

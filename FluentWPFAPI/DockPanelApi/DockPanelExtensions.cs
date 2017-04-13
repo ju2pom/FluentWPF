@@ -21,7 +21,6 @@ namespace FluentWPFAPI.DockPanelApi
       return dockPanel;
     }
 
-    //public static IFluentItem<DockPanel> DockTop(this IFluentItem<DockPanel> dockPanel, IFluentItem child)
     public static IFluentItem<DockPanel> DockTop<T>(this IFluentItem<DockPanel> dockPanel, IFluentItem<T> child)
       where T : FrameworkElement
     {
@@ -53,7 +52,6 @@ namespace FluentWPFAPI.DockPanelApi
       return dockPanel;
     }
 
-    //private static void Dock(IFluentItem<DockPanel> dockPanel, IFluentItem child, Dock dock)
     private static void Dock<T>(IFluentItem<DockPanel> dockPanel, IFluentItem<T> child, Dock? dock)
       where T : FrameworkElement
     {

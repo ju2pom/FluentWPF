@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using FluentWPFAPI.ThemeApi.Binding;
@@ -10,12 +11,14 @@ namespace FluentWPFAPI
   {
     private readonly List<IFluentBinding> bindings;
     private readonly List<IFluentItem> children;
+    private readonly List<Tuple<RoutedEvent, RoutedEventHandler>> eventHandlers;
 
     public FluentItem(T element)
     {
-      bindings = new List<IFluentBinding>();
-      children = new List<IFluentItem>();
-      Element = element;
+      this.bindings = new List<IFluentBinding>();
+      this.children = new List<IFluentItem>();
+      this.eventHandlers = new List<Tuple<RoutedEvent, RoutedEventHandler>>();
+      this.Element = element;
     }
 
     public T Element { get; }
@@ -39,16 +42,24 @@ namespace FluentWPFAPI
       children.Add(child);
     }
 
+    public void AddHandler(RoutedEvent ev, RoutedEventHandler handler)
+    {
+      this.eventHandlers.Add(new Tuple<RoutedEvent, RoutedEventHandler>(ev, handler));
+    }
+
     void IFluentItem.Initialize(object dataContext)
     {
       this.Element.DataContext = dataContext;
 
-      bindings
+      this.bindings
         .OfType<FluentBinding>()
         .ToList()
         .ForEach(x => x.Bind(this.Element, this.Element.DataContext));
 
-      children.ForEach(x => x.Initialize(dataContext));
+      this.eventHandlers
+        .ForEach(x => this.Element.AddHandler(x.Item1, x.Item2));
+
+      this.children.ForEach(x => x.Initialize(dataContext));
     }
   }
 }

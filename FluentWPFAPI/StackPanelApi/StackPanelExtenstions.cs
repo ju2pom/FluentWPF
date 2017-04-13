@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using FluentWPFAPI.ThemeApi;
+﻿using System.Windows.Controls;
 
 namespace FluentWPFAPI.StackPanelApi
 {
@@ -8,16 +6,9 @@ namespace FluentWPFAPI.StackPanelApi
   {
     public static IFluentItem<StackPanel> Stack(this IFluentItem<StackPanel> fluentItem, IFluentItem item)
     {
-      StackPanel stackPanel = Get(fluentItem);
-
-      stackPanel.Children.Add(item.Element);
+      fluentItem.Element.Children.Add(item.Element);
 
       return fluentItem;
-    }
-
-    private static StackPanel Get(IFluentItem<StackPanel> item)
-    {
-      return ((FluentItem<StackPanel>)item).Element;
     }
   }
 }

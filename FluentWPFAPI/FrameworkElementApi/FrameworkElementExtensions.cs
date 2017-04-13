@@ -56,6 +56,14 @@ namespace FluentWPFAPI.FrameworkElementApi
       return item;
     }
 
+    public static IFluentItem<T> On<T>(this IFluentItem<T> item, RoutedEvent ev, RoutedEventHandler handler)
+      where T : FrameworkElement
+    {
+      item.AddHandler(ev, handler);
+
+      return item;
+    }
+
     public static IFluentItem<T> UseStyle<T>(this IFluentItem<T> item, string key)
       where T : FrameworkElement
     {
