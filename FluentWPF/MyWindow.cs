@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
@@ -77,9 +78,12 @@ namespace FluentWPF
             .Row(4).Column(0).Span(1, 3)
             .Contains(new ProgressBar()
               .AsFluent()
+              .Bind(BindingExtensions
+                .Property(RangeBase.ValueProperty)
+                .OneWay(nameof(MyWindowDataContext.Progress))
+                .Convert(x => Math.Round((double)x)))
               .Minium(0)
               .Maximum(100)
-              .Value(50)
               .MarginTop(10)
               .MarginBottom(10))))
         .Initialize(new MyWindowDataContext());

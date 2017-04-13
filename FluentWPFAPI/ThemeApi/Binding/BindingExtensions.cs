@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Data;
+using FluentWPFAPI.Converters;
 
 namespace FluentWPFAPI.ThemeApi.Binding
 {
@@ -36,6 +38,13 @@ namespace FluentWPFAPI.ThemeApi.Binding
     public static IFluentBinding OneTime(this IFluentBinding fluentBinding, string path)
     {
       Bind(fluentBinding, path, BindingMode.OneTime);
+
+      return fluentBinding;
+    }
+
+    public static IFluentBinding Convert(this IFluentBinding fluentBinding, Func<object, object> convert)
+    {
+      fluentBinding.Converter = new LambdaConverter(convert);
 
       return fluentBinding;
     }

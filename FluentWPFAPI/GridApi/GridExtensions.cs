@@ -34,147 +34,16 @@ namespace FluentWPFAPI.GridApi
       return gridFluentItem;
     }
 
-    public static IFluentItem<Grid> Row(this IFluentItem<Grid> item, GridLength height)
-    {
-      FluentItem<Grid> fluentItem = (FluentItem<Grid>)item;
-      fluentItem.Element.RowDefinitions.Add(new RowDefinition { Height = height });
-
-      return item;
-    }
-
-    public static IFluentItem<Grid> Column(this IFluentItem<Grid> item, GridLength width)
-    {
-      FluentItem<Grid> fluentItem = (FluentItem<Grid>)item;
-      fluentItem.Element.ColumnDefinitions.Add(new ColumnDefinition { Width = width });
-
-      return item;
-    }
-
-    public static IFluentItem<Grid> Row(this IFluentItem<Grid> grid, double height)
-    {
-      FluentItem<Grid> fluentItem = (FluentItem<Grid>)grid;
-      fluentItem.Element.RowDefinitions.Add(new RowDefinition { Height = new GridLength(height) });
-
-      return grid;
-    }
-
-    public static IFluentItem<Grid> Column(this IFluentItem<Grid> grid, double width)
-    {
-      FluentItem<Grid> fluentItem = (FluentItem<Grid>)grid;
-      fluentItem.Element.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(width) });
-
-      return grid;
-    }
-
-    public static IFluentItem<Grid> Row(this IFluentItem<Grid> grid)
-    {
-      FluentItem<Grid> fluentItem = (FluentItem<Grid>)grid;
-      fluentItem.Element.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-
-      return grid;
-    }
-
-    public static IFluentItem<Grid> Column(this IFluentItem<Grid> grid)
-    {
-      FluentItem<Grid> fluentItem = (FluentItem<Grid>)grid;
-      fluentItem.Element.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-
-      return grid;
-    }
-
-    public static IFluentItem<Grid> Row(this IFluentItem<Grid> grid, string pourcentage)
-    {
-      GridLength gridLength;
-      if (GridCell.TryGetGridLength(pourcentage, out gridLength))
-      {
-        FluentItem<Grid> fluentItem = (FluentItem<Grid>)grid;
-        fluentItem.Element.RowDefinitions.Add(new RowDefinition { Height = gridLength });
-
-        return grid;
-      }
-
-      throw new ArgumentException("{0} is not a valid grid height", pourcentage);
-    }
-
-    public static IFluentItem<Grid> Column(this IFluentItem<Grid> grid, string pourcentage)
-    {
-      GridLength gridLength;
-      if (GridCell.TryGetGridLength(pourcentage, out gridLength))
-      {
-        FluentItem<Grid> fluentItem = (FluentItem<Grid>) grid;
-        fluentItem.Element.ColumnDefinitions.Add(new ColumnDefinition { Width = gridLength });
-
-        return grid;
-      }
-
-      throw new ArgumentException("{0} is not a valid grid width", pourcentage);
-    }
-
-    public static IFluentItem<Grid> Rows(this IFluentItem<Grid> grid, params string[] pourcentages)
-    {
-      FluentItem<Grid> fluentItem = (FluentItem<Grid>)grid;
-
-      foreach (string pourcentage in pourcentages)
-      {
-        GridLength gridLength;
-        if (GridCell.TryGetGridLength(pourcentage, out gridLength))
-        {
-          fluentItem.Element.RowDefinitions.Add(new RowDefinition { Height = gridLength });
-        }
-        else
-        {
-          throw new ArgumentException("{0} is not a valid grid height", pourcentage);
-        }
-      }
-
-      return grid;
-    }
-
-    public static IFluentItem<Grid> Columns(this IFluentItem<Grid> grid, params string[] pourcentages)
-    {
-      FluentItem<Grid> fluentItem = (FluentItem<Grid>)grid;
-
-      foreach (string pourcentage in pourcentages)
-      {
-        GridLength gridLength;
-        if (GridCell.TryGetGridLength(pourcentage, out gridLength))
-        {
-          fluentItem.Element.ColumnDefinitions.Add(new ColumnDefinition { Width = gridLength });
-        }
-        else
-        {
-          throw new ArgumentException("{0} is not a valid grid width", pourcentage);
-        }
-      }
-
-      return grid;
-    }
-
-    public static IFluentItem<Grid> Rows(this IFluentItem<Grid> grid, params int[] pixels)
-    {
-      FluentItem<Grid> fluentItem = (FluentItem<Grid>)grid;
-
-      foreach (int height in pixels)
-      {
-        fluentItem.Element.RowDefinitions.Add(new RowDefinition { Height = new GridLength(height, GridUnitType.Star) });
-      }
-
-      return grid;
-    }
-
-    public static IFluentItem<Grid> Columns(this IFluentItem<Grid> grid, params int[] pixels)
-    {
-      FluentItem<Grid> fluentItem = (FluentItem<Grid>)grid;
-
-      foreach (int width in pixels)
-      {
-        fluentItem.Element.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(width, GridUnitType.Star) });
-      }
-
-      return grid;
-    }
-
-
+    /// <summary>
+    /// Add a new cell to the parent grid, you can specify row and columns using dedicated extension methods
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// .Cell(GridCellExtensions.Create()
+    ///   .Row(1).Column(2).Span(2, 1)
+    ///   .Contains( ...))
+    /// </code>
+    /// </example>
     public static IFluentItem<Grid> Cell(this IFluentItem<Grid> fluentItem, IGridCell cell)
     {
       (fluentItem as GridFluentItem)?.SetupCell(cell);
@@ -183,6 +52,74 @@ namespace FluentWPFAPI.GridApi
 
       return fluentItem;
     }
+
+    #region Rows
+
+    public static IGridCell Row(this IFluentItem<Grid> item, GridLength height)
+    {
+      IGridCell cell = GridCellExtensions.Create();
+      cell.Height = height;
+      cell.Row = item.Element.RowDefinitions.Count;
+
+      return cell;
+    }
+
+    public static IGridCell Row(this IFluentItem<Grid> grid, double height)
+    {
+      return grid.Row(new GridLength(height));
+    }
+
+    public static IGridCell Row(this IFluentItem<Grid> grid)
+    {
+      return grid.Row(GridLength.Auto);
+    }
+
+    public static IGridCell Row(this IFluentItem<Grid> grid, string pourcentage)
+    {
+      GridLength gridLength;
+      if (GridCell.TryGetGridLength(pourcentage, out gridLength))
+      {
+        return grid.Row(gridLength);
+      }
+
+      throw new ArgumentException("{0} is not a valid grid height", pourcentage);
+    }
+    
+    #endregion
+
+    #region Columns
+
+    public static IGridCell Column(this IFluentItem<Grid> item, GridLength width)
+    {
+      IGridCell cell = GridCellExtensions.Create();
+      cell.Width = width;
+      cell.Column = item.Element.ColumnDefinitions.Count;
+
+      return cell;
+    }
+
+    public static IGridCell Column(this IFluentItem<Grid> grid, double width)
+    {
+      return grid.Column(new GridLength(width));
+    }
+
+    public static IGridCell Column(this IFluentItem<Grid> grid)
+    {
+      return grid.Column(GridLength.Auto);
+    }
+
+    public static IGridCell Column(this IFluentItem<Grid> grid, string pourcentage)
+    {
+      GridLength gridLength;
+      if (GridCell.TryGetGridLength(pourcentage, out gridLength))
+      {
+        return grid.Column(gridLength);
+      }
+
+      throw new ArgumentException("{0} is not a valid grid width", pourcentage);
+    }
+
+    #endregion
 
     private class GridFluentItem : FluentItem<Grid>
     {

@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="ButtonApi\ButtonExtensions.cs" />
     <Compile Include="ContentControlApi\ContentControlExtensions.cs" />
+    <Compile Include="Converters\LambdaConverter.cs" />
     <Compile Include="DockPanelApi\DockPanelExtensions.cs" />
     <Compile Include="FluentItem.cs" />
     <Compile Include="FrameworkElementApi\FrameworkElementExtensions.cs" />

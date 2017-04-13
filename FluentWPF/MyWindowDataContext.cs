@@ -12,7 +12,10 @@ namespace FluentWPF
       LoopCommand = new RelayCommand(OnLoop);
       ShuffleCommand = new RelayCommand(OnShuffle);
       this.MenuItems = new List<string> {"File", "Edit", "Help"};
+      this.Progress = 30.5;
     }
+
+    public double Progress { get; }
 
     public IEnumerable<string> MenuItems { get; }
 
