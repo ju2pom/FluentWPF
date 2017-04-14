@@ -7,37 +7,29 @@ namespace FluentWPFAPI.ThemeApi.Binding
 {
   public static class BindingExtensions
   {
-    public static IFluentBinding Property(DependencyProperty property)
+    public static IFluentBinding OneWay(DependencyProperty property)
     {
-      FluentBinding fluentBinding = new FluentBinding(property);
-
-      return fluentBinding;
+      return Create(BindingMode.OneWay, property);
     }
 
-    public static IFluentBinding OneWay(this IFluentBinding fluentBinding, string path)
+    public static IFluentBinding TwoWay(this IFluentBinding fluentBinding, DependencyProperty property)
     {
-      Bind(fluentBinding, path, BindingMode.OneWay);
-
-      return fluentBinding;
+      return Create(BindingMode.TwoWay, property);
     }
 
-    public static IFluentBinding TwoWay(this IFluentBinding fluentBinding, string path)
+    public static IFluentBinding OneWayToSource(this IFluentBinding fluentBinding, DependencyProperty property)
     {
-      Bind(fluentBinding, path, BindingMode.TwoWay);
-
-      return fluentBinding;
+      return Create(BindingMode.OneWayToSource, property);
     }
 
-    public static IFluentBinding OneWayToSource(this IFluentBinding fluentBinding, string path)
+    public static IFluentBinding OneTime(this IFluentBinding fluentBinding, DependencyProperty property)
     {
-      Bind(fluentBinding, path, BindingMode.OneWayToSource);
-
-      return fluentBinding;
+      return Create(BindingMode.OneTime, property);
     }
 
-    public static IFluentBinding OneTime(this IFluentBinding fluentBinding, string path)
+    public static IFluentBinding With(this IFluentBinding fluentBinding, string path)
     {
-      Bind(fluentBinding, path, BindingMode.OneTime);
+      fluentBinding.Path = new PropertyPath(path);
 
       return fluentBinding;
     }
@@ -49,10 +41,11 @@ namespace FluentWPFAPI.ThemeApi.Binding
       return fluentBinding;
     }
 
-    private static void Bind(IFluentBinding fluentBinding, string path, BindingMode mode)
+    private static IFluentBinding Create(BindingMode mode, DependencyProperty property)
     {
-      fluentBinding.Mode = mode;
-      fluentBinding.Path = new PropertyPath(path);
+      FluentBinding fluentBinding = new FluentBinding(property) {Mode = mode};
+
+      return fluentBinding;
     }
   }
 }
