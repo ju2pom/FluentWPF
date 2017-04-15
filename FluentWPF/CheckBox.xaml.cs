@@ -11,7 +11,7 @@ namespace FluentWPF
 {
   public partial class Theme
   {
-    public override void LoadCheckBoxStyle(IThemeColors colors)
+    public Style GetCheckBoxStyle(IThemeColors colors)
     {
       var template = TemplateExtensions.Create<Border>()
         .TemplateBinding(Control.BackgroundProperty, Control.BackgroundProperty)
@@ -26,7 +26,7 @@ namespace FluentWPF
           .Center())
         .AsControlTemplate<CheckBox>();
 
-      var style = StyleExtensions.Create()
+      return StyleExtensions.Create()
         .Set(Control.ForegroundProperty, colors.Text.Normal)
         .When(TriggerExtensions.Property(ToggleButton.IsCheckedProperty)
           .Is(true)
@@ -40,13 +40,6 @@ namespace FluentWPF
           .Then(ContentControl.ContentProperty, null))
         .Template(template)
         .AsStyle<CheckBox>();
-      /*
-              .When(x => x.ActualWidth > 100)
-              .Then(ContentControl.ContentProperty, null)
-              .EndWhen()
-      */
-
-      this.Add(typeof(CheckBox), style);
     }
   }
 }

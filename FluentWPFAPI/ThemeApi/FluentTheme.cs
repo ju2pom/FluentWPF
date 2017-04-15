@@ -1,27 +1,20 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 
 namespace FluentWPFAPI.ThemeApi
 {
-  public class FluentTheme : ResourceDictionary, IFluentTheme
+  public abstract class FluentTheme : ResourceDictionary, IFluentTheme
   {
-    public FluentTheme(IThemeColors colors)
+    public static void Load(IFluentTheme theme, IThemeColors themeColors)
     {
-      this.LoadButtonStyle(colors);
-      this.LoadCheckBoxStyle(colors);
-      this.LoadRadioButtonStyle(colors);
-      this.LoadWindowStyle(colors);
+      ResourceDictionary dictionary = (ResourceDictionary)theme;
 
-      this.LoadCustomStyles(colors);
+      theme.GetDefaultStyles(themeColors)
+        .ToList()
+        .ForEach(x => dictionary.Add(x.TargetType, x));
     }
 
-    public virtual void LoadButtonStyle(IThemeColors colors) { }
-
-    public virtual void LoadCheckBoxStyle(IThemeColors colors) { }
-
-    public virtual void LoadRadioButtonStyle(IThemeColors colors) { }
-
-    public virtual void LoadWindowStyle(IThemeColors colors) { }
-
-    public virtual void LoadCustomStyles(IThemeColors colors) { }
+    public abstract IEnumerable<System.Windows.Style> GetDefaultStyles(IThemeColors themeColors);
   }
 }

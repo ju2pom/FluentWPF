@@ -9,7 +9,7 @@ namespace FluentWPF
 {
   public partial class Theme
   {
-    public override void LoadButtonStyle(IThemeColors colors)
+    public Style GetButtonStyle(IThemeColors colors)
     {
       var template = TemplateExtensions.Create<Border>()
         .Set(Border.CornerRadiusProperty, new CornerRadius(4))
@@ -20,7 +20,7 @@ namespace FluentWPF
           .TemplateBinding(ContentPresenter.ContentProperty, ContentControl.ContentProperty))
         .AsControlTemplate<Button>();
 
-      var style = StyleExtensions.Create()
+      return StyleExtensions.Create()
         .Set(Control.ForegroundProperty, colors.Text.Normal)
         .Set(FrameworkElement.WidthProperty, 25d)
         .Set(FrameworkElement.HeightProperty, 25d)
@@ -29,8 +29,6 @@ namespace FluentWPF
           .Then(Control.BackgroundProperty, colors.Control.Over))
         .Template(template)
         .AsStyle<Button>();
-
-      this.Add(typeof(Button), style);
     }
   }
 }

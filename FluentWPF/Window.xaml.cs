@@ -7,14 +7,11 @@ namespace FluentWPF
 {
   public partial class Theme
   {
-    public override void LoadWindowStyle(IThemeColors colors)
+    public Style GetWindowStyle(IThemeColors colors)
     {
-      var style = StyleExtensions.Create()
+      return StyleExtensions.Create()
         .Set(Control.BackgroundProperty, colors.Control.Normal)
         .AsStyle<Window>();
-
-      this.Add(typeof(Window), style);
-      this.Add(typeof(MainWindow), style);
     }
   }
 }

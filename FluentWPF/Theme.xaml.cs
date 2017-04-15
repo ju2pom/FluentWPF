@@ -1,4 +1,6 @@
-﻿using System.Windows.Media;
+﻿using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Media;
 using FluentWPFAPI.ThemeApi;
 using FluentWPFAPI.ThemeApi.Color;
 
@@ -6,11 +8,23 @@ namespace FluentWPF
 {
   public partial class Theme : FluentTheme
   {
-    private static readonly IThemeColors colors;
-
-    static Theme()
+    public Theme()
     {
-      colors = new ThemeColors()
+      this.InitializeComponent();
+
+      FluentTheme.Load(this, this.GetColors());
+    }
+
+    public override IEnumerable<Style> GetDefaultStyles(IThemeColors themeColors)
+    {
+      yield return this.GetWindowStyle(themeColors);
+      yield return this.GetButtonStyle(themeColors);
+      yield return this.GetCheckBoxStyle(themeColors);
+    }
+
+    private IThemeColors GetColors()
+    {
+      return new ThemeColors()
         .Text(new ColorPack()
           .Normal(Colors.Black))
         .Control(new ColorPack()
@@ -18,12 +32,6 @@ namespace FluentWPF
           .Over(Colors.LightGray))
         .Outline(new ColorPack()
           .Normal(Colors.Black));
-    }
-
-    public Theme()
-      : base(colors)
-    {
-      this.InitializeComponent();
     }
   }
 }

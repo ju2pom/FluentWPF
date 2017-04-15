@@ -1,15 +1,10 @@
-﻿namespace FluentWPFAPI.ThemeApi
+﻿using System.Collections;
+using System.Collections.Generic;
+
+namespace FluentWPFAPI.ThemeApi
 {
   public interface IFluentTheme
   {
-    void LoadButtonStyle(IThemeColors colors);
-
-    void LoadCheckBoxStyle(IThemeColors colors);
-
-    void LoadRadioButtonStyle(IThemeColors colors);
-
-    void LoadWindowStyle(IThemeColors colors);
-
-    void LoadCustomStyles(IThemeColors colors);
+    IEnumerable<System.Windows.Style> GetDefaultStyles(IThemeColors colors);
   }
 }

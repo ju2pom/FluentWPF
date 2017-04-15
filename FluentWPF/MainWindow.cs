@@ -19,6 +19,8 @@ namespace FluentWPF
   {
     public MainWindow()
     {
+      this.SetResourceReference(StyleProperty, typeof(Window));
+
       var content = new DockPanel()
         .AsFluent()
         .DockTop(new Menu()
@@ -113,6 +115,7 @@ namespace FluentWPF
         .Contains(content)
         .Size(400, 250)
         .NoResize()
+        .NoBorder()
         .Initialize(new MyWindowDataContext());
     }
 
