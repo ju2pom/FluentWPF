@@ -9,6 +9,7 @@ namespace FluentWPFAPI.ThemeApi
       this.LoadButtonStyle(colors);
       this.LoadCheckBoxStyle(colors);
       this.LoadRadioButtonStyle(colors);
+      this.LoadWindowStyle(colors);
 
       this.LoadCustomStyles(colors);
     }
@@ -18,6 +19,8 @@ namespace FluentWPFAPI.ThemeApi
     public virtual void LoadCheckBoxStyle(IThemeColors colors) { }
 
     public virtual void LoadRadioButtonStyle(IThemeColors colors) { }
+
+    public virtual void LoadWindowStyle(IThemeColors colors) { }
 
     public virtual void LoadCustomStyles(IThemeColors colors) { }
   }

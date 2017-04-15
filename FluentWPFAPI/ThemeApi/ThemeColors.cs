@@ -1,7 +1,11 @@
-﻿namespace FluentWPFAPI.ThemeApi
+﻿using FluentWPFAPI.ThemeApi.Color;
+
+namespace FluentWPFAPI.ThemeApi
 {
   public class ThemeColors : IThemeColors
   {
+    public ThemeColors() { }
+
     public ThemeColors(IColorPack text, IColorPack control, IColorPack outline)
     {
       this.Text = text;
@@ -9,10 +13,10 @@
       this.Outline = outline;
     }
 
-    public IColorPack Text { get; }
+    public IColorPack Text { get; set; }
 
-    public IColorPack Control { get; }
+    public IColorPack Control { get; set; }
 
-    public IColorPack Outline { get; }
+    public IColorPack Outline { get; set; }
   }
 }

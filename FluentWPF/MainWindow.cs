@@ -11,18 +11,16 @@ using FluentWPFAPI.ImageApi;
 using FluentWPFAPI.ProgressApi;
 using FluentWPFAPI.ThemeApi.Binding;
 using FluentWPFAPI.DockPanelApi;
+using FluentWPFAPI.WindowApi;
 
 namespace FluentWPF
 {
-  public class MyWindow
+  public class MainWindow : Window
   {
-    private readonly FrameworkElement _content;
-
-    public MyWindow()
+    public MainWindow()
     {
-      this._content = new DockPanel()
+      var content = new DockPanel()
         .AsFluent()
-        .Size(400, 150)
         .DockTop(new Menu()
           .AsFluent()
           .Bind(BindingExtensions
@@ -30,36 +28,42 @@ namespace FluentWPF
             .With(nameof(MyWindowDataContext.MenuItems))))
         .Dock(new Grid()
           .AsFluent()
-          .Set(x => x.Background, new SolidColorBrush(Colors.RosyBrown))
-          .Set(FrameworkElement.ToolTipProperty, "Media player")
           .DefaultCellSize("*", "*")
           .Cell(GridCellExtensions.Create()
-            .Row(0).Column(0).Span(3, 2)
+            .Row(0)
+            .Column(0)
+            .Span(3, 2)
             .Contains(new Image()
               .AsFluent()
               .From(@"/Resources/Queen_Jazz.png")
               .Stretch(Stretch.Fill)
               .Margin(10)))
           .Cell(GridCellExtensions.Create()
-            .Row(1).Column(2)
+            .Row(1)
+            .Column(2)
             .Contains(new CheckBox()
               .AsFluent()
               .Center()
               .Contains("Shuffle")
+              .Set(FrameworkElement.ToolTipProperty, "Play playlist in random order")
               .Bind(BindingExtensions
                 .OneWay(ButtonBase.CommandProperty)
                 .With(nameof(MyWindowDataContext.ShuffleCommand)))))
           .Cell(GridCellExtensions.Create()
-            .Row(2).Column(2)
+            .Row(2)
+            .Column(2)
             .Contains(new CheckBox()
               .AsFluent()
               .Center()
               .Contains("Loop")
+              .Set(FrameworkElement.ToolTipProperty, "Repeat playlist")
               .Bind(BindingExtensions
                 .OneWay(ButtonBase.CommandProperty)
                 .With(nameof(MyWindowDataContext.LoopCommand)))))
           .Cell(GridCellExtensions.Create()
-            .Row(3).Column(0).Span(1, 3)
+            .Row(3)
+            .Column(0)
+            .Span(1, 3)
             .AutoHeight()
             .Contains(new TextBlock()
               .AsFluent()
@@ -68,34 +72,47 @@ namespace FluentWPF
                 .OneWay(TextBlock.TextProperty)
                 .With(nameof(MyWindowDataContext.SongTitle)))))
           .Cell(GridCellExtensions.Create()
-            .Row(4).Column(0)
+            .Row(4)
+            .Column(0)
             .AutoHeight()
             .Contains(new Button()
               .AsFluent()
               .Contains("<<")))
+              .Set(FrameworkElement.ToolTipProperty, "Go to previous song")
           .Cell(GridCellExtensions.Create()
-            .Row(4).Column(1)
+            .Row(4)
+            .Column(1)
             .Contains(new Button()
               .AsFluent()
               .Contains(">")))
+              .Set(FrameworkElement.ToolTipProperty, "Play")
           .Cell(GridCellExtensions.Create()
-            .Row(4).Column(2)
+            .Row(4)
+            .Column(2)
             .Contains(new Button()
               .AsFluent()
               .Contains(">>")
+              .Set(FrameworkElement.ToolTipProperty, "Go to next song")
               .On(ButtonBase.ClickEvent, OnNextSong)))
           .Cell(GridCellExtensions.Create()
-            .Row(5).Column(0).Span(1, 3)
+            .Row(5)
+            .Column(0)
+            .Span(1, 3)
             .Contains(new ProgressBar()
               .AsFluent()
               .Bind(BindingExtensions
                 .OneWay(RangeBase.ValueProperty)
                 .With(nameof(MyWindowDataContext.Progress))
-                .Convert(x => Math.Round((double)x)))
+                .Convert(x => Math.Round((double) x)))
               .Minium(0)
               .Maximum(100)
               .MarginTop(10)
-              .MarginBottom(10))))
+              .MarginBottom(10))));
+
+      this.AsFluent()
+        .Contains(content)
+        .Size(400, 250)
+        .NoResize()
         .Initialize(new MyWindowDataContext());
     }
 
@@ -103,11 +120,6 @@ namespace FluentWPF
     {
       Button btn = sender as Button;
       btn.Foreground = new SolidColorBrush(Colors.Blue);
-    }
-
-    public FrameworkElement Create()
-    {
-      return this._content;
     }
   }
 }

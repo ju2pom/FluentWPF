@@ -1,5 +1,6 @@
 ﻿using System.Windows.Media;
 using FluentWPFAPI.ThemeApi;
+using FluentWPFAPI.ThemeApi.Color;
 
 namespace FluentWPF
 {
@@ -9,11 +10,14 @@ namespace FluentWPF
 
     static Theme()
     {
-      IColorPack textColors = new ColorPack(new SolidColorBrush(Colors.Black));
-      IColorPack controlColors = new ColorPack(new SolidColorBrush(Colors.DarkGray), new SolidColorBrush(Colors.LightGray));
-      IColorPack outlineColors = new ColorPack(new SolidColorBrush(Colors.Black));
-
-      colors = new ThemeColors(textColors, controlColors, outlineColors);
+      colors = new ThemeColors()
+        .Text(new ColorPack()
+          .Normal(Colors.Black))
+        .Control(new ColorPack()
+          .Normal(Colors.DarkGray)
+          .Over(Colors.LightGray))
+        .Outline(new ColorPack()
+          .Normal(Colors.Black));
     }
 
     public Theme()

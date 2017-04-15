@@ -8,6 +8,8 @@
 
     void LoadRadioButtonStyle(IThemeColors colors);
 
+    void LoadWindowStyle(IThemeColors colors);
+
     void LoadCustomStyles(IThemeColors colors);
   }
 }
