@@ -7,7 +7,7 @@ namespace FluentWPF
 {
   public partial class Theme
   {
-    public Style GetWindowStyle(IThemeColors colors)
+    private Style GetWindowStyle(IThemeColors colors)
     {
       return StyleExtensions.Create()
         .Set(Control.BackgroundProperty, colors.Control.Normal)

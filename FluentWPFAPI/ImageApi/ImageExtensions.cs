@@ -8,7 +8,7 @@ namespace FluentWPFAPI.ImageApi
 {
   public static class ImageExtensions
   {
-    public static IFluentItem<Image> From(this IFluentItem<Image> item, string source)
+    public static IFluentItem<Image> Source(this IFluentItem<Image> item, string source)
     {
       string packedUri = $"pack://application:,,,/{Assembly.GetCallingAssembly().GetName()};component/{source}";
 

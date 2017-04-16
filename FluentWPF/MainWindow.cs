@@ -37,7 +37,7 @@ namespace FluentWPF
             .Span(3, 2)
             .Contains(new Image()
               .AsFluent()
-              .From(@"/Resources/Queen_Jazz.png")
+              .Source(@"/Resources/Queen_Jazz.png")
               .Stretch(Stretch.Fill)
               .Margin(10)))
           .Cell(GridCellExtensions.Create()
@@ -111,7 +111,7 @@ namespace FluentWPF
               .MarginTop(10)
               .MarginBottom(10))));
 
-      this.AsFluent()
+      this.AsFluent<Window>()
         .Contains(content)
         .Size(400, 250)
         .NoResize()
@@ -121,8 +121,8 @@ namespace FluentWPF
 
     private void OnNextSong(object sender, RoutedEventArgs routedEventArgs)
     {
-      Button btn = sender as Button;
-      btn.Foreground = new SolidColorBrush(Colors.Blue);
+      PlayerView v = new PlayerView();
+      v.Show();
     }
   }
 }

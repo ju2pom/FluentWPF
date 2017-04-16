@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using FluentWPFAPI.ThemeApi;
 using FluentWPFAPI.ThemeApi.Style;
 using FluentWPFAPI.ThemeApi.Template;
@@ -9,10 +10,9 @@ namespace FluentWPF
 {
   public partial class Theme
   {
-    public Style GetButtonStyle(IThemeColors colors)
+    private Style GetButtonStyle(IThemeColors colors)
     {
       var template = TemplateExtensions.Create<Border>()
-        .Set(Border.CornerRadiusProperty, new CornerRadius(4))
         .TemplateBinding(Control.BackgroundProperty, Control.BackgroundProperty)
         .Contains(TemplateExtensions.Create<ContentPresenter>()
           .Set(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Center)
@@ -22,8 +22,7 @@ namespace FluentWPF
 
       return StyleExtensions.Create()
         .Set(Control.ForegroundProperty, colors.Text.Normal)
-        .Set(FrameworkElement.WidthProperty, 25d)
-        .Set(FrameworkElement.HeightProperty, 25d)
+        .Set(Control.BackgroundProperty, new SolidColorBrush(Colors.Transparent))
         .When(TriggerExtensions.Property(UIElement.IsMouseOverProperty)
           .Is(true)
           .Then(Control.BackgroundProperty, colors.Control.Over))

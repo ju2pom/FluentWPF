@@ -11,7 +11,7 @@ namespace FluentWPF
 {
   public partial class Theme
   {
-    public Style GetCheckBoxStyle(IThemeColors colors)
+    private Style GetCheckBoxStyle(IThemeColors colors)
     {
       var template = TemplateExtensions.Create<Border>()
         .TemplateBinding(Control.BackgroundProperty, Control.BackgroundProperty)

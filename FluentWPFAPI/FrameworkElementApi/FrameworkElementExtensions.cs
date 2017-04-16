@@ -3,6 +3,8 @@ using System.Windows;
 
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Windows.Controls;
+using System.Windows.Media;
 using FluentWPFAPI.ThemeApi.Binding;
 using FluentWPFAPI.ThemeApi.Style;
 
@@ -22,6 +24,20 @@ namespace FluentWPFAPI.FrameworkElementApi
       fluentItem.Element.DataContext = dataContext;
 
       return fluentItem;
+    }
+
+    public static IFluentItem<T> Transparent<T>(this IFluentItem<T> item)
+      where T : FrameworkElement
+    {
+      Window window = item.Element as Window;
+      if (window != null)
+      {
+        window.AllowsTransparency = true;
+      }
+
+      Get(item).SetValue(Control.BackgroundProperty, new SolidColorBrush(Colors.Transparent));
+
+      return item;
     }
 
     public static IFluentItem<T> Set<T>(this IFluentItem<T> item, DependencyProperty property, object value)
