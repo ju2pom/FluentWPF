@@ -18,6 +18,14 @@ namespace FluentWPFAPI.FrameworkElementApi
       return new FluentItem<T>(element);
     }
 
+    public static IFluentItem<T> Field<T>(this IFluentItem<T> fluentItem, out T field)
+      where T : FrameworkElement
+    {
+      field = fluentItem.Element;
+
+      return fluentItem;
+    }
+
     public static IFluentItem<T> DataContext<T>(this IFluentItem<T> fluentItem, object dataContext)
       where T : FrameworkElement
     {

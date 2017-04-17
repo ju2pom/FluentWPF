@@ -5,6 +5,8 @@ namespace FluentWPFAPI.ThemeApi.Binding
 {
   public interface IFluentBinding
   {
+    object Source { get; set; }
+
     PropertyPath Path { get; set; }
 
     BindingMode Mode { get; set; }

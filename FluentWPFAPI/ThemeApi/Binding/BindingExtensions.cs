@@ -34,6 +34,13 @@ namespace FluentWPFAPI.ThemeApi.Binding
       return fluentBinding;
     }
 
+    public static IFluentBinding Source(this IFluentBinding fluentBinding, object source)
+    {
+      fluentBinding.Source = source;
+
+      return fluentBinding;
+    }
+
     public static IFluentBinding Convert(this IFluentBinding fluentBinding, Func<object, object> convert)
     {
       fluentBinding.Converter = new LambdaConverter(convert);

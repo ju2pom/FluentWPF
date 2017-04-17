@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace FluentWPFAPI.ThemeApi.Template
@@ -29,9 +30,9 @@ namespace FluentWPFAPI.ThemeApi.Template
     }
 
 
-    public static IFluentTemplateItem TemplateBinding(this IFluentTemplateItem templateItem, DependencyProperty property, DependencyProperty templateProperty)
+    public static IFluentTemplateItem TemplateBinding(this IFluentTemplateItem templateItem, DependencyProperty property, DependencyProperty templateProperty, Func<object, object> converter = null)
     {
-      templateItem.Binding(property, templateProperty);
+      templateItem.Binding(property, templateProperty, converter);
 
       return templateItem;
     }

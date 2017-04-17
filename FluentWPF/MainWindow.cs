@@ -123,6 +123,7 @@ namespace FluentWPF
     {
       PlayerView v = new PlayerView();
       v.Show();
+      this.Hide();
     }
   }
 }

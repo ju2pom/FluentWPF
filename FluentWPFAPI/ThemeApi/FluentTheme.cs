@@ -11,6 +11,7 @@ namespace FluentWPFAPI.ThemeApi
       ResourceDictionary dictionary = (ResourceDictionary)theme;
 
       theme.GetDefaultStyles(themeColors)
+        .Where(x => x != null)
         .ToList()
         .ForEach(x => dictionary.Add(x.TargetType, x));
     }

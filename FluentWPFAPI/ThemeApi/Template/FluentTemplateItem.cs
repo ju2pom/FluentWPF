@@ -1,5 +1,6 @@
 using System;
 using System.Windows;
+using FluentWPFAPI.Converters;
 
 namespace FluentWPFAPI.ThemeApi.Template
 {
@@ -17,12 +18,18 @@ namespace FluentWPFAPI.ThemeApi.Template
       this.itemFactory.AppendChild((child as FluentTemplateItem).GetFactory());
     }
 
-    public void Binding(DependencyProperty property, object value)
+    public void Binding(DependencyProperty property, object value, Func<object, object> converter)
     {
       DependencyProperty templateProperty = value as DependencyProperty;
       if (templateProperty != null)
       {
-        this.itemFactory.SetValue(property, new TemplateBindingExtension(templateProperty));
+        var bindingExtension = new TemplateBindingExtension(templateProperty);
+        if (converter != null)
+        {
+          bindingExtension.Converter = new LambdaConverter(converter);
+        }
+
+        this.itemFactory.SetValue(property, bindingExtension);
       }
       else
       {

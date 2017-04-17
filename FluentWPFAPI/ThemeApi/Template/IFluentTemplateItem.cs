@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 
 namespace FluentWPFAPI.ThemeApi.Template
@@ -7,6 +8,6 @@ namespace FluentWPFAPI.ThemeApi.Template
   {
     void AddChild(IFluentTemplateItem child);
 
-    void Binding(DependencyProperty property, object value);
+    void Binding(DependencyProperty property, object value, Func<object, object> converter = null);
   }
 }

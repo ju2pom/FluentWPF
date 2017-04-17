@@ -12,10 +12,10 @@ namespace FluentWPF
     {
       var template = TemplateExtensions.Create<DockPanel>()
           .Contains(TemplateExtensions.Create<Border>()
-            .Set(Border.CornerRadiusProperty, new CornerRadius(3, 3, 0, 0))
+            //.Set(Border.CornerRadiusProperty, new CornerRadius(3, 3, 0, 0))
             .Set(Control.BackgroundProperty, colors.Control.Accent1)
-            .Set(Border.BorderBrushProperty, colors.Outline.Normal)
-            .Set(Border.BorderThicknessProperty, new Thickness(1,1,1,0))
+            //.Set(Border.BorderBrushProperty, colors.Outline.Normal)
+            //.Set(Border.BorderThicknessProperty, new Thickness(1,1,1,0))
             .Set(DockPanel.DockProperty, Dock.Top)
             .Contains(TemplateExtensions.Create<ContentPresenter>()
               .Set(ContentPresenter.ContentSourceProperty, "Header")

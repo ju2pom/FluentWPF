@@ -14,6 +14,7 @@ namespace FluentWPF
     {
       ThemeColors = GetColors();
     }
+
     public Theme()
     {
       this.InitializeComponent();
@@ -27,6 +28,7 @@ namespace FluentWPF
       yield return this.GetButtonStyle(themeColors);
       yield return this.GetCheckBoxStyle(themeColors);
       yield return this.GetHeaderContentControlStyle(themeColors);
+      yield return this.GetExpanderStyle(themeColors);
     }
 
     private static IThemeColors GetColors()
