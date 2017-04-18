@@ -2,6 +2,8 @@
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using FluentWPF.MediaConnectors;
+using FluentWPF.ViewModel;
 using FluentWPFAPI.ContentControlApi;
 using FluentWPFAPI.DockPanelApi;
 using FluentWPFAPI.FrameworkElementApi;
@@ -21,6 +23,8 @@ namespace FluentWPF
 
     public PlayerView()
     {
+      var vm = new MediaBrowserViewModel(new DeezerConnector());
+
       this.AsFluent<Window>()
         .NoBorder()
         .NoResize()
@@ -48,7 +52,13 @@ namespace FluentWPF
                   .Cell(GridCellExtensions.Create()
                     .Contains(new Button()
                       .AsFluent()
-                      .Contains("\xE90B")))
+                      .Contains("\xE90B")
+                      .Bind(BindingExtensions
+                        .OneTime(ButtonBase.CommandParameterProperty)
+                        .Source("Queen"))
+                      .Bind(BindingExtensions
+                        .OneTime(ButtonBase.CommandProperty)
+                        .Source(vm.SearchArtistCommand))))
                   .Cell(GridCellExtensions.Create()
                     .Column(1)
                     .Contains(new Button()

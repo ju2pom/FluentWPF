@@ -12,17 +12,17 @@ namespace FluentWPFAPI.ThemeApi.Binding
       return Create(BindingMode.OneWay, property);
     }
 
-    public static IFluentBinding TwoWay(this IFluentBinding fluentBinding, DependencyProperty property)
+    public static IFluentBinding TwoWay(DependencyProperty property)
     {
       return Create(BindingMode.TwoWay, property);
     }
 
-    public static IFluentBinding OneWayToSource(this IFluentBinding fluentBinding, DependencyProperty property)
+    public static IFluentBinding OneWayToSource(DependencyProperty property)
     {
       return Create(BindingMode.OneWayToSource, property);
     }
 
-    public static IFluentBinding OneTime(this IFluentBinding fluentBinding, DependencyProperty property)
+    public static IFluentBinding OneTime(DependencyProperty property)
     {
       return Create(BindingMode.OneTime, property);
     }
