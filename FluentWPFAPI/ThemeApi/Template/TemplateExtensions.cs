@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using FluentWPFAPI.Converters;
 
 namespace FluentWPFAPI.ThemeApi.Template
 {
@@ -30,7 +32,19 @@ namespace FluentWPFAPI.ThemeApi.Template
     }
 
 
-    public static IFluentTemplateItem TemplateBinding(this IFluentTemplateItem templateItem, DependencyProperty property, DependencyProperty templateProperty, Func<object, object> converter = null)
+    public static IFluentTemplateItem TemplateBinding(this IFluentTemplateItem templateItem, DependencyProperty property, DependencyProperty templateProperty)
+    {
+      return templateItem.TemplateBinding(property, templateProperty, (IValueConverter)null);
+    }
+
+    public static IFluentTemplateItem TemplateBinding(this IFluentTemplateItem templateItem, DependencyProperty property, DependencyProperty templateProperty, Func<object, object> lambda)
+    {
+      IValueConverter converter = lambda != null ? new LambdaConverter(lambda) : null;
+
+      return templateItem.TemplateBinding(property, templateProperty, converter);
+    }
+
+    public static IFluentTemplateItem TemplateBinding(this IFluentTemplateItem templateItem, DependencyProperty property, DependencyProperty templateProperty, IValueConverter converter)
     {
       templateItem.Binding(property, templateProperty, converter);
 

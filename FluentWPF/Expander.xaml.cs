@@ -34,7 +34,7 @@ namespace FluentWPF
               .Set(ContentPresenter.ContentSourceProperty, "Header")))
           .Contains(TemplateExtensions.Create<ContentPresenter>()
             .Set(ContentPresenter.ContentSourceProperty, "Content")
-            .TemplateBinding(UIElement.VisibilityProperty, Expander.IsExpandedProperty, x => (bool) x ? Visibility.Visible : Visibility.Collapsed))
+            .TemplateBinding(UIElement.VisibilityProperty, Expander.IsExpandedProperty, new BooleanToVisibilityConverter()))
           .AsControlTemplate<Expander>();
 
         HambergerMenu = StyleExtensions.Create()

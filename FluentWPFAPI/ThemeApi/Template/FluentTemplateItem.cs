@@ -19,7 +19,7 @@ namespace FluentWPFAPI.ThemeApi.Template
       this.itemFactory.AppendChild((child as FluentTemplateItem).GetFactory());
     }
 
-    public void Binding(DependencyProperty property, object value, Func<object, object> converter)
+    public void Binding(DependencyProperty property, object value, IValueConverter converter)
     {
       DependencyProperty templateProperty = value as DependencyProperty;
       if (templateProperty != null)
@@ -27,7 +27,7 @@ namespace FluentWPFAPI.ThemeApi.Template
         System.Windows.Data.Binding b = new System.Windows.Data.Binding();
         b.RelativeSource = RelativeSource.TemplatedParent;
         b.Path = new PropertyPath(templateProperty);
-        b.Converter = converter != null ? new LambdaConverter(converter) : null;
+        b.Converter = converter;
 
         /*var bindingExtension = new TemplateBindingExtension(templateProperty);
         if (converter != null)
