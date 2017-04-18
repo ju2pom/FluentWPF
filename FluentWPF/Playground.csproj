@@ -64,6 +64,10 @@
       <DependentUpon>Theme.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ToggleButton.xaml.cs">
+      <DependentUpon>Theme.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Expander.xaml.cs">
       <DependentUpon>Theme.xaml</DependentUpon>
       <SubType>Code</SubType>

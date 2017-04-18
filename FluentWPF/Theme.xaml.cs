@@ -29,13 +29,14 @@ namespace FluentWPF
       yield return this.GetCheckBoxStyle(themeColors);
       yield return this.GetHeaderContentControlStyle(themeColors);
       yield return this.GetExpanderStyle(themeColors);
+      yield return this.GetToggleButtonStyle(themeColors);
     }
 
     private static IThemeColors GetColors()
     {
       return new ThemeColors()
         .Text(new ColorPack()
-          .Normal(Colors.Black))
+          .Normal(Colors.White))
         .Control(new ColorPack()
           .Normal(Color.FromRgb(30,40,48))
           .Over(Color.FromRgb(75,83,88))
