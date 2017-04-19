@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 
 namespace FluentWPF
 {
@@ -30,13 +31,13 @@ namespace FluentWPF
 
     public ICommand ShuffleCommand { get; private set; }
 
-    private void OnShuffle(object obj)
+    private void OnShuffle()
     {
       IsShuffleEnabled = !IsShuffleEnabled;
       this.OnPropertyChanged(nameof(IsShuffleEnabled));
     }
 
-    private void OnLoop(object obj)
+    private void OnLoop()
     {
       IsLoopEnabled = !IsLoopEnabled;
       this.OnPropertyChanged(nameof(IsLoopEnabled));

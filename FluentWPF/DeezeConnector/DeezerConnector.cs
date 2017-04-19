@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using E.Deezer;
-using E.Deezer.Api;
 using FluentWPF.Interfaces;
+using FluentWPF.Media;
+using IArtist = FluentWPF.Interfaces.IArtist;
 
-namespace FluentWPF.MediaConnectors
+namespace FluentWPF.DeezeConnector
 {
   public class DeezerConnector : IMediaConnector
   {
@@ -19,7 +21,7 @@ namespace FluentWPF.MediaConnectors
     {
       var artists = await this.deezer.Search.Artists(artist);
 
-      return artists;
+      return artists.Select(x => new DeezerArtist(x));
     }
   }
 }

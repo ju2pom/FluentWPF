@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
-
+using FluentWPF.Views;
 using FluentWPFAPI.FrameworkElementApi;
 using FluentWPFAPI.ContentControlApi;
 using FluentWPFAPI.GridApi;
@@ -121,7 +121,7 @@ namespace FluentWPF
 
     private void OnNextSong(object sender, RoutedEventArgs routedEventArgs)
     {
-      PlayerView v = new PlayerView();
+      PlayerMainWindow v = new PlayerMainWindow();
       v.Show();
       this.Hide();
     }

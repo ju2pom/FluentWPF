@@ -56,7 +56,9 @@
     <Compile Include="GridApi\GridCell.cs" />
     <Compile Include="GridApi\IGridCell.cs" />
     <Compile Include="HeaderedContentControlApi\HeaderedContentControlExtensions.cs" />
+    <Compile Include="ItemsControlApi\ItemsControlExtensions.cs" />
     <Compile Include="MenuApi\MenuExtensions.cs" />
+    <Compile Include="TabControlApi\TabControlExtensions.cs" />
     <Compile Include="ThemeApi\Binding\BindingExtensions.cs" />
     <Compile Include="ThemeApi\Binding\FluentBinding.cs" />
     <Compile Include="ThemeApi\Binding\IFluentBinding.cs" />
