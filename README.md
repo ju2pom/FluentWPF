@@ -136,6 +136,9 @@ var NiceCheckBox = StyleExtensions.Create()
   
 # Roadmap
 - Cover same functionalities as XAML
+  - Support animations
+  - Support triggers
+  - Support behaviors
 - Write samples
 - Offer a code friendly Theme engine
 - More samples
@@ -143,5 +146,5 @@ var NiceCheckBox = StyleExtensions.Create()
 - API documention (or more samples)
 - Extend the API functionalities beyond XAML
   - Leverage lambdas (for triggers?)
-  - Support inheritance for styles
+  - Support inheritance/mixins for styles
 - Further reduce API verbosity
