@@ -15,6 +15,7 @@ namespace FluentWPF.Views
     public PlayerView()
     {
       this.AsFluent()
+        .Set(FrameworkElement.VisibilityProperty, Visibility.Collapsed)
         .Contains(new StackPanel()
           .AsFluent()
           .Stack(new Image()

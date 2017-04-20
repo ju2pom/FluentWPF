@@ -18,8 +18,10 @@ namespace FluentWPF.Views
       this.vm = new MediaBrowserViewModel();
 
       this.AsFluent()
+        .Set(FrameworkElement.VisibilityProperty, Visibility.Collapsed)
         .Contains(new StackPanel()
           .AsFluent()
+          .Margin(0,40,0,0)
           .Stack(new TextBlock()
             .AsFluent()
             .Set(TextBlock.TextProperty, "Search"))
