@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using FluentWPFAPI;
 using FluentWPFAPI.ContentControlApi;
 using FluentWPFAPI.FrameworkElementApi;
 using FluentWPFAPI.GridApi;
@@ -12,9 +13,11 @@ namespace FluentWPF.Views
 {
   public class PlayerView : TabItem
   {
+    private readonly IFluentItem<TabItem> fluentItem;
+
     public PlayerView()
     {
-      this.AsFluent()
+      this.fluentItem  = this.AsFluent<TabItem>()
         .Set(FrameworkElement.VisibilityProperty, Visibility.Collapsed)
         .Contains(new StackPanel()
           .AsFluent()
@@ -61,6 +64,11 @@ namespace FluentWPF.Views
                 .Value(30)
                 .Set(FrameworkElement.HeightProperty, 8d)
                 .Set(Control.ForegroundProperty, Theme.ThemeColors.Control.Accent2)))));
+    }
+
+    public IFluentItem<TabItem> AsFluent()
+    {
+      return this.fluentItem;
     }
   }
 }

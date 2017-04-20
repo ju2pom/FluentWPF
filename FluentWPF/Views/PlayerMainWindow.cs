@@ -74,8 +74,8 @@ namespace FluentWPF.Views
               .Bind(BindingExtensions
                 .TwoWay(TabControl.SelectedIndexProperty)
                 .With(nameof(MediaBrowserViewModel.CurrentView)))
-              .Tab(new PlayerView().AsFluent<TabItem>())
-              .Tab(new SearchView().AsFluent<TabItem>())
+              .Tab(new PlayerView().AsFluent())
+              .Tab(new SearchView().AsFluent())
             )))
         .Initialize(this.mediaBrowserViewModel);
     }

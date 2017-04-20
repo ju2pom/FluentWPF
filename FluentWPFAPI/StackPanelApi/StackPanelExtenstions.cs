@@ -6,6 +6,7 @@ namespace FluentWPFAPI.StackPanelApi
   {
     public static IFluentItem<StackPanel> Stack(this IFluentItem<StackPanel> fluentItem, IFluentItem item)
     {
+      fluentItem.AddChild(item);
       fluentItem.Element.Children.Add(item.Element);
 
       return fluentItem;
