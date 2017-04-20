@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using FluentWPF.DeezeConnector;
 using FluentWPF.Interfaces;
@@ -13,6 +14,7 @@ namespace FluentWPF.ViewModel
 
     private int currentView;
     private bool isMenuOpened;
+    private IEnumerable<IArtist> results;
 
     public MediaBrowserViewModel()
     {
@@ -49,13 +51,17 @@ namespace FluentWPF.ViewModel
 
     public ICommand SearchArtistCommand { get; }
 
-    public IEnumerable<object> Result { get; private set; }
+    public IEnumerable<IArtist> Artists
+    {
+      get { return this.results; }
+    }
 
     private async void SearchArtist(object obj)
     {
       string artistName = (string)obj;
 
-      this.Result = await this.connector.SearchArtist(artistName);
+      this.results = await this.connector.SearchArtist(artistName);
+      this.RaisePropertyChanged(nameof(this.Artists));
     }
   }
 }

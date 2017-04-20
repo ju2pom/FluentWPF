@@ -9,6 +9,8 @@ namespace FluentWPFAPI.ThemeApi.Template
   {
     void AddChild(IFluentTemplateItem child);
 
+    void SetValue(DependencyProperty property, object value);
+
     void Binding(DependencyProperty property, object value, IValueConverter converter = null);
   }
 }

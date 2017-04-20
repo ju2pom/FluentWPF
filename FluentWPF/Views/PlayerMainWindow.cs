@@ -32,6 +32,7 @@ namespace FluentWPF.Views
               .AutoHeight()
               .Contains(new Expander()
                 .AsFluent<HeaderedContentControl>()
+                .Top()
                 .Size(300, 300)
                 .Bind(BindingExtensions
                   .TwoWay(Expander.IsExpandedProperty)

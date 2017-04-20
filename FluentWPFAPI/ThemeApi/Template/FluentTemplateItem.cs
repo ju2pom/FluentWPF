@@ -1,7 +1,6 @@
 using System;
 using System.Windows;
 using System.Windows.Data;
-using FluentWPFAPI.Converters;
 
 namespace FluentWPFAPI.ThemeApi.Template
 {
@@ -21,28 +20,26 @@ namespace FluentWPFAPI.ThemeApi.Template
 
     public void Binding(DependencyProperty property, object value, IValueConverter converter)
     {
-      DependencyProperty templateProperty = value as DependencyProperty;
-      if (templateProperty != null)
+      System.Windows.Data.Binding b;
+      string path = value as string;
+      if (path != null)
       {
-        System.Windows.Data.Binding b = new System.Windows.Data.Binding();
-        b.RelativeSource = RelativeSource.TemplatedParent;
-        b.Path = new PropertyPath(templateProperty);
-        b.Converter = converter;
-
-        /*var bindingExtension = new TemplateBindingExtension(templateProperty);
-        if (converter != null)
-        {
-          bindingExtension.Converter = new LambdaConverter(converter);
-        }
-
-        this.itemFactory.SetValue(property, bindingExtension);*/
-        this.itemFactory.SetBinding(property, b);
-
+        b = new System.Windows.Data.Binding(path);
       }
       else
       {
-        this.itemFactory.SetValue(property, value);
+        b = new System.Windows.Data.Binding();
+        DependencyProperty templateProperty = value as DependencyProperty;
+        b.Path = new PropertyPath(templateProperty);
+        b.RelativeSource = RelativeSource.TemplatedParent;
       }
+      this.itemFactory.SetBinding(property, b);
+      b.Converter = converter;
+    }
+
+    public void SetValue(DependencyProperty property, object value)
+    {
+      this.itemFactory.SetValue(property, value);
     }
 
     internal virtual FrameworkElementFactory GetFactory()

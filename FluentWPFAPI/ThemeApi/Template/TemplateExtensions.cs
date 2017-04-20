@@ -53,7 +53,14 @@ namespace FluentWPFAPI.ThemeApi.Template
 
     public static IFluentTemplateItem Set(this IFluentTemplateItem templateItem, DependencyProperty property, object value)
     {
-      templateItem.Binding(property, value);
+      templateItem.SetValue(property, value);
+
+      return templateItem;
+    }
+
+    public static IFluentTemplateItem Bind(this IFluentTemplateItem templateItem, DependencyProperty property, string path, IValueConverter converter = null)
+    {
+      templateItem.Binding(property, path, converter);
 
       return templateItem;
     }
@@ -80,6 +87,13 @@ namespace FluentWPFAPI.ThemeApi.Template
       FrameworkElementFactory factory = (templateItem as FluentTemplateItem)?.GetFactory();
 
       return new ControlTemplate(typeof(T)) { VisualTree = factory };
+    }
+
+    public static DataTemplate AsDataTemplate<T>(this IFluentTemplateItem templateItem)
+    {
+      FrameworkElementFactory factory = (templateItem as FluentTemplateItem)?.GetFactory();
+
+      return new DataTemplate(typeof(T)) { VisualTree = factory };
     }
   }
 }
