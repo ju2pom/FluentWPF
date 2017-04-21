@@ -10,6 +10,7 @@ namespace FluentWPF
     private Style GetTextBlockStyle(IThemeColors colors)
     {
       return StyleExtensions.Create()
+        .Set(Control.FontSizeProperty, 16d)
         .Set(Control.ForegroundProperty, colors.Text.Normal)
         .AsStyle<TextBlock>();
     }

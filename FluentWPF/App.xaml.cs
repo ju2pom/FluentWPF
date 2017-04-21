@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using FluentWPF.Views;
 
 namespace FluentWPF
 {
@@ -6,7 +7,7 @@ namespace FluentWPF
   {
     private void OnStartup(object sender, StartupEventArgs e)
     {
-      new MainWindow().Show();
+      new PlayerMainWindow().Show();
     }
   }
 }
