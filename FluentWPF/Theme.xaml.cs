@@ -31,6 +31,8 @@ namespace FluentWPF
       yield return this.GetExpanderStyle(themeColors);
       yield return this.GetToggleButtonStyle(themeColors);
       yield return this.GetTabControlStyle(themeColors);
+      yield return this.GetListBoxStyle(themeColors);
+      yield return this.GetTextBlockStyle(themeColors);
     }
 
     private static IThemeColors GetColors()

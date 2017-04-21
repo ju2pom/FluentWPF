@@ -21,7 +21,6 @@ namespace FluentWPF
         .AsControlTemplate<Button>();
 
       return StyleExtensions.Create()
-        .Set(Control.ForegroundProperty, colors.Text.Normal)
         .Set(Control.BackgroundProperty, new SolidColorBrush(Colors.Transparent))
         .When(TriggerExtensions.Property(UIElement.IsMouseOverProperty)
           .Is(true)

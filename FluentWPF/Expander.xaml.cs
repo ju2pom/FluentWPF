@@ -18,7 +18,6 @@ namespace FluentWPF
       {
         var hambergerTemplate = TemplateExtensions.Create<StackPanel>()
           .Contains(TemplateExtensions.Create<DockPanel>()
-            .Set(Control.ForegroundProperty, colors.Text.Normal)
             .Set(Control.BackgroundProperty, colors.Control.Normal)
             .Contains(TemplateExtensions.Create<ToggleButton>()
               .Set(ContentControl.ContentProperty, "☰")

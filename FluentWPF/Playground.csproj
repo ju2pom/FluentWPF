@@ -97,6 +97,14 @@
       <DependentUpon>Theme.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TextBlock.xaml.cs">
+      <DependentUpon>Theme.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ListBox.xaml.cs">
+      <DependentUpon>Theme.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="TabControl.xaml.cs">
       <DependentUpon>Theme.xaml</DependentUpon>
       <SubType>Code</SubType>
