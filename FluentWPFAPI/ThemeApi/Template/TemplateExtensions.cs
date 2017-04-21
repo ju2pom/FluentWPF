@@ -58,9 +58,9 @@ namespace FluentWPFAPI.ThemeApi.Template
       return templateItem;
     }
 
-    public static IFluentTemplateItem Bind(this IFluentTemplateItem templateItem, DependencyProperty property, string path, IValueConverter converter = null)
+    public static IFluentTemplateItem Bind(this IFluentTemplateItem templateItem, DependencyProperty property, string path, IValueConverter converter = null, object targetNullValue = null)
     {
-      templateItem.Binding(property, path, converter);
+      templateItem.Binding(property, path, converter, targetNullValue);
 
       return templateItem;
     }

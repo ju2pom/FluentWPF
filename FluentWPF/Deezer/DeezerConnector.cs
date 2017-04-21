@@ -3,14 +3,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using E.Deezer;
 using FluentWPF.Interfaces;
-using FluentWPF.Media;
 using IArtist = FluentWPF.Interfaces.IArtist;
 
-namespace FluentWPF.DeezeConnector
+namespace FluentWPF.Deezer
 {
   public class DeezerConnector : IMediaConnector
   {
-    private readonly Deezer deezer;
+    private readonly E.Deezer.Deezer deezer;
 
     public DeezerConnector()
     {

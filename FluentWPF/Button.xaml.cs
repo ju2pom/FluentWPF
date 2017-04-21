@@ -14,6 +14,7 @@ namespace FluentWPF
     {
       var template = TemplateExtensions.Create<Border>()
         .TemplateBinding(Control.BackgroundProperty, Control.BackgroundProperty)
+        .TemplateBinding(Border.PaddingProperty, Button.PaddingProperty)
         .Contains(TemplateExtensions.Create<ContentPresenter>()
           .Set(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Center)
           .Set(FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Center)
@@ -22,6 +23,7 @@ namespace FluentWPF
 
       return StyleExtensions.Create()
         .Set(Control.BackgroundProperty, new SolidColorBrush(Colors.Transparent))
+        .Set(Control.PaddingProperty, new Thickness(4))
         .When(TriggerExtensions.Property(UIElement.IsMouseOverProperty)
           .Is(true)
           .Then(Control.BackgroundProperty, colors.Control.Over))

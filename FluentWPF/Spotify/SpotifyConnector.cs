@@ -6,7 +6,7 @@ using SpotifyAPI.Web;
 using SpotifyAPI.Web.Enums;
 using IArtist = FluentWPF.Interfaces.IArtist;
 
-namespace FluentWPF.SpotifyConnector
+namespace FluentWPF.Spotify
 {
   public class SpotifyConnector : IMediaConnector
   {

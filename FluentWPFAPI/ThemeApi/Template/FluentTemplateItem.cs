@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Windows;
 using System.Windows.Data;
 
@@ -18,7 +19,7 @@ namespace FluentWPFAPI.ThemeApi.Template
       this.itemFactory.AppendChild((child as FluentTemplateItem).GetFactory());
     }
 
-    public void Binding(DependencyProperty property, object value, IValueConverter converter)
+    public void Binding(DependencyProperty property, object value, IValueConverter converter, object targetNullValue)
     {
       System.Windows.Data.Binding b;
       string path = value as string;
@@ -33,8 +34,14 @@ namespace FluentWPFAPI.ThemeApi.Template
         b.Path = new PropertyPath(templateProperty);
         b.RelativeSource = RelativeSource.TemplatedParent;
       }
-      this.itemFactory.SetBinding(property, b);
+
+      if (targetNullValue != null)
+      {
+        b.TargetNullValue = targetNullValue;
+      }
+
       b.Converter = converter;
+      this.itemFactory.SetBinding(property, b);
     }
 
     public void SetValue(DependencyProperty property, object value)

@@ -1,4 +1,6 @@
-﻿namespace FluentWPF.Interfaces
+﻿using System;
+
+namespace FluentWPF.Interfaces
 {
   public interface IArtist
   {
@@ -7,5 +9,7 @@
     string Id { get; }
 
     string Link { get; }
+
+    string PictureUri { get; }
   }
 }

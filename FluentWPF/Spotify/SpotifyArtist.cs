@@ -1,7 +1,8 @@
+using System.Linq;
 using FluentWPF.Interfaces;
 using SpotifyAPI.Web.Models;
 
-namespace FluentWPF.SpotifyConnector
+namespace FluentWPF.Spotify
 {
   public class SpotifyArtist : IArtist
   {
@@ -17,5 +18,7 @@ namespace FluentWPF.SpotifyConnector
     public string Id => this.artist.Id;
 
     public string Link => this.artist.Uri;
+
+    public string PictureUri => this.artist.Images.FirstOrDefault()?.Url;
   }
 }

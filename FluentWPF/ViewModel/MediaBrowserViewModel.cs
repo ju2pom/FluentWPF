@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using FluentWPF.DeezeConnector;
 using FluentWPF.Interfaces;
+using FluentWPF.Spotify;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -18,7 +18,7 @@ namespace FluentWPF.ViewModel
 
     public MediaBrowserViewModel()
     {
-      this.connector = new DeezerConnector();
+      this.connector = new SpotifyConnector();
       this.SearchArtistCommand = new RelayCommand<string>(this.SearchArtist);
       this.OpenSearchViewCommand = new RelayCommand(() => this.CurrentView = 1);
       this.OpenPlayerViewCommand = new RelayCommand(() => this.CurrentView = 0);

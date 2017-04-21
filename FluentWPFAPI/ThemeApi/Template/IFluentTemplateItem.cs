@@ -11,6 +11,6 @@ namespace FluentWPFAPI.ThemeApi.Template
 
     void SetValue(DependencyProperty property, object value);
 
-    void Binding(DependencyProperty property, object value, IValueConverter converter = null);
+    void Binding(DependencyProperty property, object value, IValueConverter converter = null, object targetNullValue = null);
   }
 }

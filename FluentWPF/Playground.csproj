@@ -84,11 +84,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Interfaces\IArtist.cs" />
-    <Compile Include="DeezeConnector\DeezerConnector.cs" />
+    <Compile Include="Deezer\DeezerConnector.cs" />
     <Compile Include="Interfaces\IMediaConnector.cs" />
-    <Compile Include="SpotifyConnector\SpotifyArtist.cs" />
-    <Compile Include="SpotifyConnector\SpotifyConnector.cs" />
-    <Compile Include="DeezeConnector\DeezerArtist.cs" />
+    <Compile Include="Spotify\SpotifyArtist.cs" />
+    <Compile Include="Spotify\SpotifyConnector.cs" />
+    <Compile Include="Deezer\DeezerArtist.cs" />
     <Compile Include="Views\PlayerMainWindow.cs" />
     <Compile Include="ViewModel\MediaBrowserViewModel.cs" />
     <Compile Include="Views\PlayerView.cs" />
@@ -181,7 +181,15 @@
   <ItemGroup>
     <Resource Include="Resources\Queen_Jazz.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\no-artist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\spotify.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\deezer.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
