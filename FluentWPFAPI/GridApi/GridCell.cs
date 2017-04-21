@@ -36,6 +36,16 @@ namespace FluentWPFAPI.GridApi
       Grid.SetColumn(element, this.Column);
       Grid.SetRowSpan(element, this.RowSpan);
       Grid.SetColumnSpan(element, this.ColSpan);
+
+      if (this.Width.HasValue)
+      {
+        grid.ColumnDefinitions[this.Column].Width = this.Width.Value;
+      }
+
+      if (this.Height.HasValue)
+      {
+        grid.RowDefinitions[this.Row].Height = this.Height.Value;
+      }
     }
 
     internal static bool TryGetGridLength(string value, out GridLength gridLength)
