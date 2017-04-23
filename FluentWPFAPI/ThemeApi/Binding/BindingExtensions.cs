@@ -41,9 +41,23 @@ namespace FluentWPFAPI.ThemeApi.Binding
       return fluentBinding;
     }
 
+    public static IFluentBinding WithSelf(this IFluentBinding fluentBinding, DependencyProperty property)
+    {
+      fluentBinding.RelativeSource = new RelativeSource(RelativeSourceMode.Self);
+
+      return fluentBinding;
+    }
+
     public static IFluentBinding Convert(this IFluentBinding fluentBinding, Func<object, object> convert)
     {
       fluentBinding.Converter = new LambdaConverter(convert);
+
+      return fluentBinding;
+    }
+
+    public static IFluentBinding Convert(this IFluentBinding fluentBinding, IValueConverter convert)
+    {
+      fluentBinding.Converter = convert;
 
       return fluentBinding;
     }

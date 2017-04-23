@@ -20,6 +20,7 @@ namespace FluentWPFAPI.ThemeApi.Binding
 
     public IValueConverter Converter { get; set; }
 
+    public RelativeSource RelativeSource { get; set; }
 
     public void Bind(FrameworkElement element, object source)
     {
@@ -32,6 +33,11 @@ namespace FluentWPFAPI.ThemeApi.Binding
         Mode = this.Mode,
         Converter = this.Converter,
       };
+
+      if (this.Source == null && this.RelativeSource != null)
+      {
+        RelativeSource = this.RelativeSource;
+      }
 
       BindingOperations.SetBinding(element, this.property, binding);
     }

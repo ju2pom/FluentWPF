@@ -21,6 +21,7 @@ namespace FluentWPF.Views
         .DataContext(new RootViewModel())
         .NoBorder()
         .NoResize()
+        .Set(Control.MaxHeightProperty, 420d)
         .SizeToContent(SizeToContent.WidthAndHeight)
         .Transparent()
         .Contains(new Grid()
@@ -30,7 +31,7 @@ namespace FluentWPF.Views
               .Contains(new Expander()
                 .AsFluent<HeaderedContentControl>()
                 .Top()
-                .Size(300, 300)
+                .Size(400, 400)
                 .Bind(BindingExtensions
                   .TwoWay(Expander.IsExpandedProperty)
                   .With(nameof(RootViewModel.IsMenuOpened)))

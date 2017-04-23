@@ -29,7 +29,7 @@ namespace FluentWPF.Views
           .Stack(new Image()
             .AsFluent()
             .Margin(0, 25, 0, 0)
-            .Size(300, 200)
+            .Size(300, 300)
             .Stretch(Stretch.UniformToFill)
             .Source(@"/Resources/Queen_Jazz.png"))
           .Stack(new Grid()
