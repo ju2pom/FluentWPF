@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using FluentWPF.Interfaces;
 using FluentWPF.Spotify;
@@ -8,46 +7,18 @@ using GalaSoft.MvvmLight.Command;
 
 namespace FluentWPF.ViewModel
 {
-  public class MediaBrowserViewModel : ViewModelBase
+  public class SearchViewModel : ViewModelBase
   {
     private readonly IMediaConnector connector;
 
-    private int currentView;
-    private bool isMenuOpened;
     private IEnumerable<IArtist> results;
 
-    public MediaBrowserViewModel()
+    public SearchViewModel()
     {
       this.connector = new SpotifyConnector();
       this.SearchArtistCommand = new RelayCommand<string>(this.SearchArtist);
-      this.OpenSearchViewCommand = new RelayCommand(() => this.CurrentView = 1);
-      this.OpenPlayerViewCommand = new RelayCommand(() => this.CurrentView = 0);
     }
 
-    public bool IsMenuOpened
-    {
-      get => isMenuOpened;
-      set
-      {
-        isMenuOpened = value; 
-        this.RaisePropertyChanged();
-      }
-    }
-
-    public int CurrentView
-    {
-      get => currentView;
-      set
-      {
-        currentView = value;
-        this.IsMenuOpened = false;
-        this.RaisePropertyChanged();
-      }
-    }
-
-    public ICommand OpenPlayerViewCommand { get; }
-
-    public ICommand OpenSearchViewCommand { get; }
 
     public ICommand SearchArtistCommand { get; }
 

@@ -39,6 +39,9 @@ namespace FluentWPF.Views
         .AsDataTemplate<IArtist>();
 
       this.fluentItem = this.AsFluent<TabItem>()
+        .Bind(BindingExtensions
+          .OneTime(FrameworkElement.DataContextProperty)
+          .With(nameof(RootViewModel.Search)))
         .Set(FrameworkElement.VisibilityProperty, Visibility.Collapsed)
         .Contains(new Grid()
           .AsFluent()
@@ -83,7 +86,7 @@ namespace FluentWPF.Views
               .Set(ListBox.ItemTemplateProperty, dataTemplate)
               .Bind(BindingExtensions
                 .OneWay(ListBox.ItemsSourceProperty)
-                .With(nameof(MediaBrowserViewModel.Artists)))
+                .With(nameof(SearchViewModel.Artists)))
               ))
         );
     }
@@ -99,7 +102,7 @@ namespace FluentWPF.Views
       if (eventArgs != null && eventArgs.Key == Key.Enter)
       {
         TextBox textBox = sender as TextBox;
-        MediaBrowserViewModel vm = textBox.DataContext as MediaBrowserViewModel;
+        SearchViewModel vm = textBox.DataContext as SearchViewModel;
 
         vm.SearchArtistCommand.Execute(textBox.Text);
       }

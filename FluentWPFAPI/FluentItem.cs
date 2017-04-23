@@ -49,8 +49,6 @@ namespace FluentWPFAPI
 
     void IFluentItem.Initialize(object dataContext)
     {
-      this.Element.DataContext = dataContext;
-
       this.bindings
         .OfType<FluentBinding>()
         .ToList()

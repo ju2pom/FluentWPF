@@ -15,13 +15,10 @@ namespace FluentWPF.Views
 {
   public class PlayerMainWindow : Window
   {
-    private MediaBrowserViewModel mediaBrowserViewModel;
-
     public PlayerMainWindow()
     {
-      this.mediaBrowserViewModel = new MediaBrowserViewModel();
-
       this.AsFluent<Window>()
+        .DataContext(new RootViewModel())
         .NoBorder()
         .NoResize()
         .SizeToContent(SizeToContent.WidthAndHeight)
@@ -36,7 +33,7 @@ namespace FluentWPF.Views
                 .Size(300, 300)
                 .Bind(BindingExtensions
                   .TwoWay(Expander.IsExpandedProperty)
-                  .With(nameof(MediaBrowserViewModel.IsMenuOpened)))
+                  .With(nameof(RootViewModel.IsMenuOpened)))
                 .Set(Panel.ZIndexProperty, 1)
                 .UseStyle(Theme.HambergerMenu)
                 .Header("Titre")
@@ -54,7 +51,7 @@ namespace FluentWPF.Views
                       .Contains("\xE90B")
                       .Bind(BindingExtensions
                         .OneTime(ButtonBase.CommandProperty)
-                        .With(nameof(MediaBrowserViewModel.OpenSearchViewCommand)))))
+                        .With(nameof(RootViewModel.OpenSearchViewCommand)))))
                   .Cell(GridCellExtensions.Create()
                     .Column(1)
                     .Contains(new Button()
@@ -62,7 +59,7 @@ namespace FluentWPF.Views
                       .Contains("\xE8D6")
                     .Bind(BindingExtensions
                       .OneTime(ButtonBase.CommandProperty)
-                      .With(nameof(MediaBrowserViewModel.OpenPlayerViewCommand)))))
+                      .With(nameof(RootViewModel.OpenPlayerViewCommand)))))
                   .Cell(GridCellExtensions.Create()
                     .Column(2)
                     .Contains(new Button()
@@ -74,11 +71,11 @@ namespace FluentWPF.Views
               .AsFluent()
               .Bind(BindingExtensions
                 .TwoWay(TabControl.SelectedIndexProperty)
-                .With(nameof(MediaBrowserViewModel.CurrentView)))
+                .With(nameof(RootViewModel.CurrentView)))
               .Tab(new PlayerView().AsFluent())
               .Tab(new SearchView().AsFluent())
             )))
-        .Initialize(this.mediaBrowserViewModel);
+        .Initialize(null);
     }
   }
 }
