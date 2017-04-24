@@ -13,7 +13,9 @@ namespace FluentWPFAPI.ThemeApi.Binding
 
     IValueConverter Converter { get; set; }
 
-    RelativeSource RelativeSource { get; set; }
+    RelativeSource RelativeSource { get; }
+
+    void SetRelative(RelativeSourceMode mode, DependencyProperty property);
 
     void Bind(FrameworkElement element, object source);
   }

@@ -43,7 +43,7 @@ namespace FluentWPFAPI.ThemeApi.Binding
 
     public static IFluentBinding WithSelf(this IFluentBinding fluentBinding, DependencyProperty property)
     {
-      fluentBinding.RelativeSource = new RelativeSource(RelativeSourceMode.Self);
+      fluentBinding.SetRelative(RelativeSourceMode.Self, property);
 
       return fluentBinding;
     }

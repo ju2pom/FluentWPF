@@ -20,7 +20,13 @@ namespace FluentWPFAPI.ThemeApi.Binding
 
     public IValueConverter Converter { get; set; }
 
-    public RelativeSource RelativeSource { get; set; }
+    public RelativeSource RelativeSource { get; private set; }
+
+    public void SetRelative(RelativeSourceMode mode, DependencyProperty property)
+    {
+      this.RelativeSource = new RelativeSource(mode);
+      this.Path = new PropertyPath(property);
+    }
 
     public void Bind(FrameworkElement element, object source)
     {
@@ -28,15 +34,18 @@ namespace FluentWPFAPI.ThemeApi.Binding
 
       System.Windows.Data.Binding binding = new System.Windows.Data.Binding
       {
-        Source = this.Source,
         Path = this.Path,
         Mode = this.Mode,
         Converter = this.Converter,
       };
 
-      if (this.Source == null && this.RelativeSource != null)
+      if (this.RelativeSource != null)
       {
-        RelativeSource = this.RelativeSource;
+        binding.RelativeSource = this.RelativeSource;
+      }
+      else
+      {
+        binding.Source = this.Source;
       }
 
       BindingOperations.SetBinding(element, this.property, binding);
