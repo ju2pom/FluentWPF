@@ -34,6 +34,16 @@ namespace FluentWPFAPI.FrameworkElementApi
       return fluentItem;
     }
 
+    public static IFluentItem<T> SubDataContext<T>(this IFluentItem<T> fluentItem, string path)
+      where T : FrameworkElement
+    {
+      fluentItem.Bind(BindingExtensions
+        .OneWay(FrameworkElement.DataContextProperty)
+        .With(path));
+
+      return fluentItem;
+    }
+
     public static IFluentItem<T> Transparent<T>(this IFluentItem<T> item)
       where T : FrameworkElement
     {
