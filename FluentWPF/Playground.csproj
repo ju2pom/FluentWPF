@@ -89,6 +89,7 @@
     <Compile Include="Spotify\SpotifyArtist.cs" />
     <Compile Include="Spotify\SpotifyConnector.cs" />
     <Compile Include="Deezer\DeezerArtist.cs" />
+    <Compile Include="ViewModel\SearchNavigationViewModel.cs" />
     <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="ViewModel\RootViewModel.cs" />
     <Compile Include="ViewModel\SongViewModel.cs" />

@@ -12,9 +12,10 @@ using FluentWPFAPI.ContentControlApi;
 using FluentWPFAPI.FrameworkElementApi;
 using FluentWPFAPI.GridApi;
 using FluentWPFAPI.ImageApi;
-using FluentWPFAPI.StackPanelApi;
 using FluentWPFAPI.ThemeApi.Binding;
+using FluentWPFAPI.ThemeApi.Style;
 using FluentWPFAPI.ThemeApi.Template;
+using FluentWPFAPI.ThemeApi.Triggers;
 
 namespace FluentWPF.Views
 {
@@ -39,6 +40,18 @@ namespace FluentWPF.Views
             .Bind(TextBlock.TextProperty, nameof(IArtist.Name)))
         .AsDataTemplate<IArtist>();
 
+      var navigationButtonStyle = StyleExtensions.Create()
+        .BasedOn<Button>()
+        .Set(Control.HorizontalAlignmentProperty, HorizontalAlignment.Left)
+        .Set(FrameworkElement.MarginProperty, new Thickness(4))
+        .Set(Control.FontSizeProperty, 18d)
+        .Set(Control.FontFamilyProperty, new FontFamily("Segoe UI symbol"))
+        .When(TriggerExtensions
+          .Property(FrameworkElement.IsEnabledProperty)
+          .Is(false)
+          .Then(FrameworkElement.VisibilityProperty, Visibility.Hidden))
+        .AsStyle<Button>();
+
       this.fluentItem = this.AsFluent<TabItem>()
         .Bind(BindingExtensions
           .OneTime(FrameworkElement.DataContextProperty)
@@ -55,18 +68,12 @@ namespace FluentWPF.Views
                 .Width("*")
                 .Contains(new Button()
                   .AsFluent()
-                  .Left()
-                  .Margin(4)
+                  .UseStyle(navigationButtonStyle)
                   .Contains("")
-                  .Bind(BindingExtensions
-                    .OneWay(FrameworkElement.VisibilityProperty)
-                    .WithSelf(FrameworkElement.IsEnabledProperty)
-                    .Convert(new BooleanToVisibilityConverter()))
+                  .SubDataContext(nameof(SearchViewModel.NavigationViewModel))
                   .Bind(BindingExtensions
                     .OneTime(ButtonBase.CommandProperty)
-                    .With(nameof(SearchViewModel.GoBackCommand)))
-                  .Set(Control.FontSizeProperty, 18d)
-                  .Set(Control.FontFamilyProperty, new FontFamily("Segoe UI symbol"))))
+                    .With(nameof(SearchNavigationViewModel.GoBackCommand)))))
               .Cell(GridCellExtensions.Create()
                 .Column(1)
                 .Contains(new Button()
@@ -96,6 +103,9 @@ namespace FluentWPF.Views
             .Row(1).Column(1).Width("*")
             .Contains(new TextBox()
               .AsFluent()
+              .Bind(BindingExtensions
+                .OneWayToSource(TextBox.TextProperty)
+                .With(nameof(SearchViewModel.Search)))
               .Set(FrameworkElement.MarginProperty, new Thickness(4))
               .On(TextBoxBase.KeyUpEvent, OnTextChanged)))
           .Cell(GridCellExtensions.Create()

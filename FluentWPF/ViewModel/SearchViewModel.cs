@@ -13,40 +13,49 @@ namespace FluentWPF.ViewModel
     private readonly IMediaConnector connector;
 
     private IEnumerable<IArtist> results;
+    private string search;
 
     public SearchViewModel()
     {
       this.connector = new SpotifyConnector();
-      this.SearchArtistCommand = new GalaSoft.MvvmLight.Command.RelayCommand<string>(this.SearchArtist);
-      this.GoBackCommand = new RelayCommand(this.GoBack, this.CanGoBack);
+      this.SearchArtistCommand = new RelayCommand<string>(this.SearchArtist);
+      this.NavigationViewModel = new SearchNavigationViewModel(this);
+      this.GoBackCommand = this.NavigationViewModel.GoBackCommand;
     }
+
+    public SearchNavigationViewModel NavigationViewModel { get; }
+
+    public string Search
+    {
+      get => search;
+
+      set
+      {
+        search = value;
+        this.RaisePropertyChanged();
+      }
+    }
+
+    public IEnumerable<IArtist> Artists => this.results;
 
     public ICommand SearchArtistCommand { get; }
 
-    public IEnumerable<IArtist> Artists
-    {
-      get { return this.results; }
-    }
-
     public ICommand GoBackCommand { get; }
 
-    private async void SearchArtist(object obj)
+    private void SearchArtist(object obj)
     {
-      string artistName = (string)obj;
+      string artistName = (string) obj;
 
-      this.results = await this.connector.SearchArtist(artistName);
+      this.Restore(artistName);
+      this.NavigationViewModel.Push(artistName);
+    }
+
+    public async void Restore(string text)
+    {
+      this.results = await this.connector.SearchArtist(text);
       this.RaisePropertyChanged(nameof(this.Artists));
       this.RaisePropertyChanged(nameof(GoBackCommand));
-    }
-
-    private bool CanGoBack()
-    {
-      return this.results?.Any() ?? false;
-    }
-
-    private void GoBack()
-    {
-
+      this.Search = text;
     }
   }
 }
