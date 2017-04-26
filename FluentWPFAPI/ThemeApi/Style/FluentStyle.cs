@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -14,6 +15,8 @@ namespace FluentWPFAPI.ThemeApi.Style
     private readonly List<Setter> setters;
     private readonly List<IFluentTrigger> triggers;
 
+    private Type extendDefaultType;
+
     public FluentStyle()
     {
       this.setters = new List<Setter>();
@@ -23,6 +26,8 @@ namespace FluentWPFAPI.ThemeApi.Style
     public IEnumerable<Setter> Setters => this.setters;
 
     public IEnumerable<IFluentTrigger> Triggers => this.triggers;
+
+    public Type Extends => this.extendDefaultType;
 
     public void AddSetter(DependencyProperty property, object value)
     {
@@ -38,6 +43,12 @@ namespace FluentWPFAPI.ThemeApi.Style
     {
       this.setters.AddRange(basedOnStyle.Setters);
       this.triggers.AddRange(basedOnStyle.Triggers);
+    }
+
+    public void Extend<T>()
+      where T : FrameworkElement
+    {
+      this.extendDefaultType = typeof(T);
     }
   }
 }
