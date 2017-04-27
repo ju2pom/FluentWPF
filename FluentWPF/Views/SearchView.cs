@@ -104,7 +104,7 @@ namespace FluentWPF.Views
             .Contains(new TextBox()
               .AsFluent()
               .Bind(BindingExtensions
-                .OneWayToSource(TextBox.TextProperty)
+                .TwoWay(TextBox.TextProperty)
                 .With(nameof(SearchViewModel.Search)))
               .Set(FrameworkElement.MarginProperty, new Thickness(4))
               .On(TextBoxBase.KeyUpEvent, OnTextChanged)))

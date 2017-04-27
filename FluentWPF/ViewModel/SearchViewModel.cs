@@ -52,10 +52,10 @@ namespace FluentWPF.ViewModel
 
     public async void Restore(string text)
     {
+      this.Search = text;
       this.results = await this.connector.SearchArtist(text);
       this.RaisePropertyChanged(nameof(this.Artists));
       this.RaisePropertyChanged(nameof(GoBackCommand));
-      this.Search = text;
     }
   }
 }

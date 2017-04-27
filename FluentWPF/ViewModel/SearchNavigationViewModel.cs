@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
@@ -39,13 +37,13 @@ namespace FluentWPF.ViewModel
     {
       this.searchViewModel = searchViewModel;
       this.history = new Stack<SearchQuery>();
-      this.GoBackCommand = new RelayCommand(() => this.MoveInHistory(-1), this.CanGoBack);
-      this.GoForwardCommand = new RelayCommand(() => this.MoveInHistory(1), this.CanGoForward);
+      this.GoBackCommand = new RelayCommand(() => this.MoveInHistory(1), this.CanGoBack);
+      this.GoForwardCommand = new RelayCommand(() => this.MoveInHistory(-1), this.CanGoForward);
     }
 
     private bool CanGoForward()
     {
-      return this.currentIndex < this.history.Count - 1;
+      return this.currentIndex > 0;
     }
 
     private void MoveInHistory(int step)
@@ -57,7 +55,7 @@ namespace FluentWPF.ViewModel
 
     private bool CanGoBack()
     {
-      return this.currentIndex > 0;
+      return this.currentIndex < this.history.Count - 1;
     }
 
     public ICommand GoBackCommand { get; }
@@ -66,7 +64,7 @@ namespace FluentWPF.ViewModel
 
     public void Push(string artistName)
     {
-      if (this.currentIndex != this.history.Count - 1)
+      if (this.currentIndex != 0)
       {
         Enumerable
           .Range(this.currentIndex, this.history.Count - this.currentIndex)
@@ -75,7 +73,6 @@ namespace FluentWPF.ViewModel
       }
 
       this.history.Push(new SearchQuery(SearchQuery.QueryType.Artist, this.searchViewModel.Search));
-      this.currentIndex = this.history.Count - 1;
     }
   }
 }
