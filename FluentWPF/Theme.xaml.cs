@@ -33,6 +33,7 @@ namespace FluentWPF
       yield return this.GetTabControlStyle(themeColors);
       yield return this.GetListBoxStyle(themeColors);
       yield return this.GetTextBlockStyle(themeColors);
+      yield return this.GetListBoxItemStyle(themeColors);
     }
 
     private static IThemeColors GetColors()
@@ -43,6 +44,7 @@ namespace FluentWPF
         .Control(new ColorPack()
           .Normal(Color.FromRgb(30,40,48))
           .Over(Color.FromRgb(75,83,88))
+          .Selected(Color.FromRgb(169, 180, 193))
           .Accent1(Color.FromRgb(126, 187, 69))
           .Accent2(Color.FromRgb(233, 100, 68)))
         .Outline(new ColorPack()

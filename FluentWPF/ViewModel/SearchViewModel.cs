@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
 using FluentWPF.Interfaces;
 using FluentWPF.Spotify;
