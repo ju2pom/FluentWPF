@@ -83,6 +83,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomControlsTheme.xaml.cs">
+      <DependentUpon>CustomControlsTheme.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\DropDownButton.cs" />
     <Compile Include="Interfaces\IArtist.cs" />
     <Compile Include="Deezer\DeezerConnector.cs" />
     <Compile Include="Interfaces\IMediaConnector.cs" />
@@ -93,12 +97,17 @@
     <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="ViewModel\RootViewModel.cs" />
     <Compile Include="ViewModel\SongViewModel.cs" />
+    <Compile Include="Views\ArtistContextMenu.cs" />
     <Compile Include="Views\PlayerMainWindow.cs" />
     <Compile Include="ViewModel\SearchViewModel.cs" />
     <Compile Include="Views\PlayerView.cs" />
     <Compile Include="Views\SearchView.cs" />
     <Compile Include="Window.xaml.cs">
       <DependentUpon>Theme.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DropDownButton.xaml.cs">
+      <DependentUpon>CustomControlsTheme.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ListBoxItem.xaml.cs">
@@ -145,6 +154,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="CustomControlsTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Theme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

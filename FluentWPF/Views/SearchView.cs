@@ -5,6 +5,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using FluentWPF.CustomControls;
 using FluentWPF.Interfaces;
 using FluentWPF.ViewModel;
 using FluentWPFAPI;
@@ -33,12 +34,12 @@ namespace FluentWPF.Views
             .Set(Control.HeightProperty, 25d)
             .Set(Control.WidthProperty, 25d)
             .Bind(Image.SourceProperty, nameof(IArtist.PictureUri), null, bmp))
-          .Contains(TemplateExtensions.Create<Button>()
+          .Contains(TemplateExtensions.Create<DropDownButton>()
             .Set(DockPanel.DockProperty, Dock.Right)
             .Set(ButtonBase.ContentProperty, "⋮")
-            .Set(Control.PaddingProperty, new Thickness(8,4,8,4))
             .Set(Control.FontFamilyProperty, new FontFamily("Segoe UI symbol"))
-            .Set(Control.FontSizeProperty, 18d))
+            .Set(Control.FontSizeProperty, 18d)
+            .Set(Control.ContextMenuProperty, new ArtistContextMenu()))
           .Contains(TemplateExtensions.Create<TextBlock>()
             .Set(Control.MarginProperty, new Thickness(8, 0, 0, 0))
             .Set(Control.VerticalAlignmentProperty, VerticalAlignment.Center)

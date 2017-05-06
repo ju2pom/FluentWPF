@@ -17,8 +17,6 @@ namespace FluentWPF
 
     public Theme()
     {
-      this.InitializeComponent();
-
       FluentTheme.Load(this, ThemeColors);
     }
 

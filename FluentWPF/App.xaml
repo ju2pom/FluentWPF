@@ -11,6 +11,7 @@
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Theme.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/CustomControlsTheme.xaml" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

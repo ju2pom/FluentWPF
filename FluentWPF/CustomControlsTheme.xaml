@@ -1,0 +1,6 @@
+﻿<themeApi:FluentTheme
+  x:Class="FluentWPF.CustomControlsTheme"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:themeApi="clr-namespace:FluentWPFAPI.ThemeApi;assembly=FluentWPFAPI"
+  />
