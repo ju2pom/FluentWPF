@@ -4,14 +4,14 @@ using FluentWPFAPI.FrameworkElementApi;
 
 namespace FluentWPF.Views
 {
-  public class ArtistContextMenu : ContextMenu
+  public class SearchContextMenu : ContextMenu
   {
-    public ArtistContextMenu()
+    public SearchContextMenu()
     {
       List<MenuItem> menuItems = new List<MenuItem>
       {
-        new MenuItem {Header = "Show Artist"},
-        new MenuItem {Header = "Star Artist"},
+        new MenuItem {Header = "Search for artist"},
+        new MenuItem {Header = "Search for song"},
       };
 
       this.AsFluent()

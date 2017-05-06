@@ -97,7 +97,7 @@
     <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="ViewModel\RootViewModel.cs" />
     <Compile Include="ViewModel\SongViewModel.cs" />
-    <Compile Include="Views\ArtistContextMenu.cs" />
+    <Compile Include="Views\SearchContextMenu.cs" />
     <Compile Include="Views\PlayerMainWindow.cs" />
     <Compile Include="ViewModel\SearchViewModel.cs" />
     <Compile Include="Views\PlayerView.cs" />
