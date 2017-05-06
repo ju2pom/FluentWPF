@@ -32,6 +32,7 @@ namespace FluentWPF
       yield return this.GetListBoxStyle(themeColors);
       yield return this.GetTextBlockStyle(themeColors);
       yield return this.GetListBoxItemStyle(themeColors);
+      yield return this.GetMenuItemStyle(themeColors);
     }
 
     private static IThemeColors GetColors()
