@@ -1,7 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Media;
 using FluentWPF.ViewModel;
 using FluentWPFAPI.ContentControlApi;
 using FluentWPFAPI.FrameworkElementApi;
@@ -38,34 +36,7 @@ namespace FluentWPF.Views
                 .Set(Panel.ZIndexProperty, 1)
                 .UseStyle(Theme.HambergerMenu)
                 .Header("Titre")
-                .Contains(new Grid()
-                  .AsFluent()
-                  .Set(Control.BackgroundProperty, Theme.ThemeColors.Control.Normal)
-                  .Set(StackPanel.OrientationProperty, Orientation.Horizontal)
-                  .Set(Control.FontFamilyProperty, new FontFamily("SEGOE MDL2 assets"))
-                  .Set(Control.FontSizeProperty, 18d)
-                  .Set(FrameworkElement.HeightProperty, 80d)
-                  .DefaultCellSize("*", "*")
-                  .Cell(GridCellExtensions.Create()
-                    .Contains(new Button()
-                      .AsFluent()
-                      .Contains("\xE90B")
-                      .Bind(BindingExtensions
-                        .OneTime(ButtonBase.CommandProperty)
-                        .With(nameof(RootViewModel.OpenSearchViewCommand)))))
-                  .Cell(GridCellExtensions.Create()
-                    .Column(1)
-                    .Contains(new Button()
-                      .AsFluent()
-                      .Contains("\xE8D6")
-                    .Bind(BindingExtensions
-                      .OneTime(ButtonBase.CommandProperty)
-                      .With(nameof(RootViewModel.OpenPlayerViewCommand)))))
-                  .Cell(GridCellExtensions.Create()
-                    .Column(2)
-                    .Contains(new Button()
-                      .AsFluent()
-                      .Contains("\xE74F"))))))
+                .Contains(new MainMenuView().AsFluent())))
           .Cell(GridCellExtensions.Create()
             .Height("*")
             .Contains(new TabControl()
