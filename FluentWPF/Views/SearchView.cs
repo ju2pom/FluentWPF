@@ -96,7 +96,7 @@ namespace FluentWPF.Views
               .Contains("⋮")
               .Set(Control.FontFamilyProperty, new FontFamily("Segoe UI symbol"))
               .Set(Control.FontSizeProperty, 18d)
-              .Set(Control.ContextMenuProperty, new SearchContextMenu())))
+              .Set(Control.ContextMenuProperty, SearchContextMenuBuilder.Create())))
           .Cell(GridCellExtensions.Create()
             .Row(1).Span(1, 4).Height("*")
             .Contains(new ListBox()
