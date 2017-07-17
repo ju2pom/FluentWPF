@@ -15,7 +15,8 @@ stages:
 build:
   stage: build
   script:
-  - echo building...
-  - 'msbuild.exe "%Solution%"'
+    - nuget restore
+    - echo building...
+    - 'msbuild.exe "%Solution%"'
   except:
-  - tags
+    - tags
