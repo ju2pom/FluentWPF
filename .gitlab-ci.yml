@@ -3,7 +3,7 @@ variables:
 
 before_script:
   - "echo off"
-  - 'call "%VS140COMNTOOLS%\vsvars32.bat"'
+  - 'call "%VS150COMNTOOLS%vsdevcmd.bat"'
   # output environment variables (usefull for debugging, propably not what you want to do if your ci server is public)
   - echo.
   - set
